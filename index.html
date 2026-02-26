@@ -5,7 +5,8 @@
 <title>Escape The Upside Down</title>
 <style>
 body { margin:0; background:black; color:white; text-align:center; }
-canvas { background:#111; display:block; margin:auto; image-rendering:pixelated; }
+canvas { background:#0a0a0a; display:block; margin:auto; image-rendering:pixelated; border:4px solid red; }
+h1 { color:red; text-shadow:0 0 10px red; }
 </style>
 </head>
 <body>
@@ -21,57 +22,88 @@ const TILE = 40;
 
 const map = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,1,1,1,0,0,0,1,1,1,0,0,1,1,1,0,0,0,1],
+[1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1],
+[1,0,1,0,0,0,1,0,1,0,0,1,0,0,0,1,0,1,0,1],
 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1],
-[1,0,1,1,1,1,0,0,0,1,1,1,1,0,0,1,1,1,0,1],
-[1,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,1,0,1],
-[1,0,1,1,0,1,0,0,0,1,0,0,1,1,1,1,0,1,0,1],
-[1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
 
-let player = { x: TILE*1, y: TILE*1, size: 30 };
+let player = { x: TILE*1, y: TILE*1, size: 28, speed:3 };
+let demo = { x: TILE*18, y: TILE*5, size:28, speed:1.5 };
+
 let keys = {};
+let lights = [];
+let gameOver = false;
+let win = false;
 
 document.addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
 document.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
 
-function canMove(nx, ny) {
-let col = Math.floor(nx / TILE);
-let row = Math.floor(ny / TILE);
-return map[row][col] !== 1;
+function spawnLights(){
+for(let i=0;i<6;i++){
+let x,y;
+do{
+x = Math.floor(Math.random()*18)+1;
+y = Math.floor(Math.random()*5)+1;
+}while(map[y][x]!==0);
+
+lights.push({x:x*TILE+10,y:y*TILE+10,size:10});
+}
+}
+spawnLights();
+
+function canMove(nx, ny){
+let col = Math.floor(nx/TILE);
+let row = Math.floor(ny/TILE);
+return map[row][col]!==1;
 }
 
-function update() {
-let speed = 3;
+function update(){
 
-if(keys["w"] && canMove(player.x, player.y-speed)) player.y -= speed;
-if(keys["s"] && canMove(player.x, player.y+speed)) player.y += speed;
-if(keys["a"] && canMove(player.x-speed, player.y)) player.x -= speed;
-if(keys["d"] && canMove(player.x+speed, player.y)) player.x += speed;
+if(gameOver||win) return;
 
-let goalCol = 18;
-let goalRow = 1;
+if(keys["w"] && canMove(player.x,player.y-player.speed)) player.y-=player.speed;
+if(keys["s"] && canMove(player.x,player.y+player.speed)) player.y+=player.speed;
+if(keys["a"] && canMove(player.x-player.speed,player.y)) player.x-=player.speed;
+if(keys["d"] && canMove(player.x+player.speed,player.y)) player.x+=player.speed;
 
-if(Math.floor(player.x/TILE) === goalCol &&
-   Math.floor(player.y/TILE) === goalRow){
-   alert("YOU ESCAPED THE UPSIDE DOWN!");
-   location.reload();
+let dx = player.x - demo.x;
+let dy = player.y - demo.y;
+let dist = Math.sqrt(dx*dx+dy*dy);
+demo.x += (dx/dist)*demo.speed;
+demo.y += (dy/dist)*demo.speed;
+
+lights.forEach((light,i)=>{
+if(Math.abs(player.x-light.x)<20 && Math.abs(player.y-light.y)<20){
+lights.splice(i,1);
+}
+});
+
+if(Math.abs(player.x-demo.x)<25 && Math.abs(player.y-demo.y)<25){
+gameOver = true;
+}
+
+if(lights.length===0){
+win = true;
 }
 }
 
 function drawMap(){
 for(let r=0;r<map.length;r++){
 for(let c=0;c<map[r].length;c++){
-if(map[r][c]===1){
-ctx.fillStyle="#333";
-}else if(map[r][c]===3){
-ctx.fillStyle="purple";
-}else{
-ctx.fillStyle="#111";
-}
+ctx.fillStyle = map[r][c]===1 ? "#333" : "#111";
 ctx.fillRect(c*TILE,r*TILE,TILE,TILE);
 }
 }
+}
+
+function drawLights(){
+ctx.fillStyle="yellow";
+lights.forEach(l=>{
+ctx.fillRect(l.x,l.y,l.size,l.size);
+});
 }
 
 function drawPlayer(){
@@ -79,11 +111,35 @@ ctx.fillStyle="cyan";
 ctx.fillRect(player.x,player.y,player.size,player.size);
 }
 
+function drawDemo(){
+ctx.fillStyle="purple";
+ctx.fillRect(demo.x,demo.y,demo.size,demo.size);
+}
+
+function drawUI(){
+ctx.fillStyle="white";
+ctx.fillText("Lights Left: "+lights.length,10,20);
+
+if(gameOver){
+ctx.fillStyle="red";
+ctx.font="40px monospace";
+ctx.fillText("THE DEMOGORGON GOT YOU",180,250);
+}
+if(win){
+ctx.fillStyle="lime";
+ctx.font="40px monospace";
+ctx.fillText("YOU ESCAPED!",280,250);
+}
+}
+
 function loop(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 update();
 drawMap();
+drawLights();
 drawPlayer();
+drawDemo();
+drawUI();
 requestAnimationFrame(loop);
 }
 
