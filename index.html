@@ -4,96 +4,101 @@
 <meta charset="UTF-8">
 <title>Escape The Upside Down</title>
 <style>
-body { margin:0; background:black; color:white; text-align:center; }
-canvas { background:#0a0a0a; display:block; margin:auto; image-rendering:pixelated; border:4px solid red; }
-h1 { color:red; text-shadow:0 0 10px red; }
+body { margin:0; background:black; overflow:hidden; font-family:monospace; }
+canvas { display:block; margin:auto; background:#050505; image-rendering:pixelated; }
 </style>
 </head>
 <body>
-
-<h1>ESCAPE THE UPSIDE DOWN</h1>
-<canvas id="game" width="800" height="500"></canvas>
+<canvas id="game" width="960" height="576"></canvas>
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-const TILE = 40;
+const TILE = 48;
+const ROWS = 12;
+const COLS = 20;
 
 const map = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1],
+[1,0,1,1,1,0,0,0,1,1,1,0,0,1,1,1,0,0,0,1],
+[1,0,0,0,1,0,0,0,1,2,0,0,0,1,0,0,0,0,0,1],
+[1,0,1,0,0,0,1,0,1,0,0,1,0,0,0,1,0,1,0,1],
+[1,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,1],
+[1,0,1,0,0,0,1,0,1,0,0,1,0,0,0,1,0,1,0,1],
 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 [1,0,1,1,1,0,0,0,1,1,1,0,0,1,1,1,0,0,0,1],
-[1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1],
-[1,0,1,0,0,0,1,0,1,0,0,1,0,0,0,1,0,1,0,1],
-[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
 
-let player = { x: TILE*1, y: TILE*1, size: 28, speed:3 };
-let demo = { x: TILE*18, y: TILE*5, size:28, speed:1.5 };
+let player = { x:TILE*1, y:TILE*1, size:32, speed:3, health:3 };
+let demo = { x:TILE*18, y:TILE*9, size:32, speed:1.6 };
 
 let keys = {};
 let lights = [];
-let gameOver = false;
-let win = false;
+let gameOver=false;
+let win=false;
 
-document.addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
-document.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
+document.addEventListener("keydown", e=> keys[e.key.toLowerCase()] = true);
+document.addEventListener("keyup", e=> keys[e.key.toLowerCase()] = false);
 
 function spawnLights(){
-for(let i=0;i<6;i++){
+for(let i=0;i<8;i++){
 let x,y;
 do{
-x = Math.floor(Math.random()*18)+1;
-y = Math.floor(Math.random()*5)+1;
+x=Math.floor(Math.random()*18)+1;
+y=Math.floor(Math.random()*10)+1;
 }while(map[y][x]!==0);
-
-lights.push({x:x*TILE+10,y:y*TILE+10,size:10});
+lights.push({x:x*TILE+18,y:y*TILE+18,size:12});
 }
 }
 spawnLights();
 
-function canMove(nx, ny){
-let col = Math.floor(nx/TILE);
-let row = Math.floor(ny/TILE);
-return map[row][col]!==1;
+function canMove(nx,ny){
+let col=Math.floor(nx/TILE);
+let row=Math.floor(ny/TILE);
+return map[row][col]!==1 && map[row][col]!==2;
 }
 
 function update(){
-
 if(gameOver||win) return;
 
-if(keys["w"] && canMove(player.x,player.y-player.speed)) player.y-=player.speed;
-if(keys["s"] && canMove(player.x,player.y+player.speed)) player.y+=player.speed;
-if(keys["a"] && canMove(player.x-player.speed,player.y)) player.x-=player.speed;
-if(keys["d"] && canMove(player.x+player.speed,player.y)) player.x+=player.speed;
+if(keys["w"]&&canMove(player.x,player.y-player.speed)) player.y-=player.speed;
+if(keys["s"]&&canMove(player.x,player.y+player.speed)) player.y+=player.speed;
+if(keys["a"]&&canMove(player.x-player.speed,player.y)) player.x-=player.speed;
+if(keys["d"]&&canMove(player.x+player.speed,player.y)) player.x+=player.speed;
 
-let dx = player.x - demo.x;
-let dy = player.y - demo.y;
-let dist = Math.sqrt(dx*dx+dy*dy);
-demo.x += (dx/dist)*demo.speed;
-demo.y += (dy/dist)*demo.speed;
+let dx=player.x-demo.x;
+let dy=player.y-demo.y;
+let dist=Math.sqrt(dx*dx+dy*dy);
+demo.x+=(dx/dist)*demo.speed;
+demo.y+=(dy/dist)*demo.speed;
 
-lights.forEach((light,i)=>{
-if(Math.abs(player.x-light.x)<20 && Math.abs(player.y-light.y)<20){
+lights.forEach((l,i)=>{
+if(Math.abs(player.x-l.x)<20 && Math.abs(player.y-l.y)<20){
 lights.splice(i,1);
 }
 });
 
 if(Math.abs(player.x-demo.x)<25 && Math.abs(player.y-demo.y)<25){
-gameOver = true;
+player.health--;
+demo.x=TILE*18;
+demo.y=TILE*9;
+if(player.health<=0) gameOver=true;
 }
 
-if(lights.length===0){
-win = true;
-}
+if(lights.length===0) win=true;
 }
 
 function drawMap(){
-for(let r=0;r<map.length;r++){
-for(let c=0;c<map[r].length;c++){
-ctx.fillStyle = map[r][c]===1 ? "#333" : "#111";
+for(let r=0;r<ROWS;r++){
+for(let c=0;c<COLS;c++){
+if(map[r][c]===1) ctx.fillStyle="#2b2b2b";
+else if(map[r][c]===2) ctx.fillStyle="#444";
+else ctx.fillStyle="#0d0d0d";
 ctx.fillRect(c*TILE,r*TILE,TILE,TILE);
 }
 }
@@ -101,9 +106,7 @@ ctx.fillRect(c*TILE,r*TILE,TILE,TILE);
 
 function drawLights(){
 ctx.fillStyle="yellow";
-lights.forEach(l=>{
-ctx.fillRect(l.x,l.y,l.size,l.size);
-});
+lights.forEach(l=>ctx.fillRect(l.x,l.y,l.size,l.size));
 }
 
 function drawPlayer(){
@@ -116,19 +119,31 @@ ctx.fillStyle="purple";
 ctx.fillRect(demo.x,demo.y,demo.size,demo.size);
 }
 
+function drawFlashlight(){
+ctx.save();
+ctx.fillStyle="rgba(0,0,0,0.85)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.globalCompositeOperation="destination-out";
+ctx.beginPath();
+ctx.arc(player.x+16,player.y+16,140,0,Math.PI*2);
+ctx.fill();
+ctx.restore();
+}
+
 function drawUI(){
 ctx.fillStyle="white";
-ctx.fillText("Lights Left: "+lights.length,10,20);
+ctx.fillText("Lights: "+lights.length,20,20);
+ctx.fillText("Health: "+player.health,20,40);
 
 if(gameOver){
 ctx.fillStyle="red";
-ctx.font="40px monospace";
-ctx.fillText("THE DEMOGORGON GOT YOU",180,250);
+ctx.font="50px monospace";
+ctx.fillText("YOU DIED",380,280);
 }
 if(win){
 ctx.fillStyle="lime";
-ctx.font="40px monospace";
-ctx.fillText("YOU ESCAPED!",280,250);
+ctx.font="50px monospace";
+ctx.fillText("YOU ESCAPED",320,280);
 }
 }
 
@@ -139,12 +154,12 @@ drawMap();
 drawLights();
 drawPlayer();
 drawDemo();
+drawFlashlight();
 drawUI();
 requestAnimationFrame(loop);
 }
 
 loop();
 </script>
-
 </body>
 </html>
