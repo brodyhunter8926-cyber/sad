@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Escape the Upside Down</title>
+<style>
+    body {
+        background: black;
+        margin: 0;
+        overflow: hidden;
+        font-family: monospace;
+        color: white;
+        text-align: center;
+    }
+    canvas {
+        background: #111;
+        image-rendering: pixelated;
+        display: block;
+        margin: auto;
+        border: 4px solid red;
+    }
+    h1 {
+        color: red;
+        text-shadow: 0 0 10px red;
+    }
+</style>
+</head>
+<body>
+
+<h1>ESCAPE THE UPSIDE DOWN</h1>
+<canvas id="game" width="800" height="400"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let player = { x: 50, y: 300, width: 20, height: 20, color: "cyan" };
+let demogorgon = { x: 700, y: 300, width: 20, height: 20, speed: 2 };
+let lights = [];
+let score = 0;
+let gameOver = false;
+
+for (let i = 0; i < 5; i++) {
+    lights.push({
+        x: Math.random() * 750,
+        y: 300,
+        width: 10,
+        height: 10
+    });
+}
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") player.x += 20;
+    if (e.key === "ArrowLeft") player.x -= 20;
+});
+
+function update() {
+    if (gameOver) return;
+
+    demogorgon.x -= demogorgon.speed;
+    if (demogorgon.x < 0) demogorgon.x = 800;
+
+    lights.forEach((light, index) => {
+        if (player.x < light.x + light.width &&
+            player.x + player.width > light.x &&
+            player.y < light.y + light.height &&
+            player.y + player.height > light.y) {
+                lights.splice(index, 1);
+                score++;
+        }
+    });
+
+    if (player.x < demogorgon.x + demogorgon.width &&
+        player.x + player.width > demogorgon.x &&
+        player.y < demogorgon.y + demogorgon.height &&
+        player.y + player.height > demogorgon.y) {
+            gameOver = true;
+    }
+
+    if (lights.length === 0) {
+        gameOver = true;
+    }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = player.color;
+    ctx.fillRect(player.x, player.y, player.width, player.height);
+
+    ctx.fillStyle = "purple";
+    ctx.fillRect(demogorgon.x, demogorgon.y, demogorgon.width, demogorgon.height);
+
+    ctx.fillStyle = "yellow";
+    lights.forEach(light => {
+        ctx.fillRect(light.x, light.y, light.width, light.height);
+    });
+
+    ctx.fillStyle = "white";
+    ctx.fillText("Lights: " + score, 10, 20);
+
+    if (gameOver) {
+        ctx.fillStyle = "red";
+        ctx.font = "40px monospace";
+        ctx.fillText("GAME OVER", 250, 200);
+    }
+}
+
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+
+</body>
+</html>
