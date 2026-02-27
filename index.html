@@ -247,6 +247,88 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .ul-note::before{content:'▸ ';}
 /* Coin badge */
 .coins-badge{display:inline-block;background:rgba(253,203,110,.1);border:1px solid rgba(253,203,110,.28);border-radius:4px;padding:4px 10px;font-size:clamp(7px,2vw,9px);color:#fdcb6e;margin-bottom:12px;}
+
+/* Snowfall animation */
+@keyframes snowFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(105vh) rotate(360deg);opacity:0.2;}}
+
+/* Christmas theme accent overrides */
+.xmas-accent{color:#ff4444!important;}
+.xmas-badge{
+  display:inline-block;background:rgba(200,30,30,.15);border:1px solid rgba(255,80,80,.4);
+  border-radius:4px;padding:2px 6px;font-size:clamp(4px,1.2vw,5px);color:#ff6060;
+  font-family:'Press Start 2P',cursive;
+}
+.theme-locked-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.45);border-radius:10px;pointer-events:none;
+  font-size:clamp(7px,2vw,10px);
+}
+
+/* Seasonal shop card */
+.seasonal-shop-card{transition:border-color .3s,background .3s;}
+.seasonal-shop-card.season-christmas{border-color:rgba(200,60,60,.4)!important;background:linear-gradient(135deg,rgba(4,18,4,.95),rgba(20,4,4,.95))!important;}
+.seasonal-shop-card.season-valentines{border-color:rgba(200,80,120,.4)!important;background:linear-gradient(135deg,rgba(28,4,14,.95),rgba(14,2,8,.95))!important;}
+.theme-grid{display:flex;flex-direction:column;gap:10px;}
+.theme-card{
+  border-radius:10px;border:2px solid rgba(162,155,254,.15);
+  cursor:pointer;transition:all .15s;touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  padding:12px 14px;display:flex;align-items:center;gap:12px;
+  background:rgba(8,8,28,.85);position:relative;overflow:hidden;
+}
+.theme-card.sel{border-color:#fdcb6e;box-shadow:0 0 12px rgba(253,203,110,.3);}
+.theme-card.locked{opacity:0.8;}
+.theme-card:active{transform:scale(0.98);}
+.theme-card-emoji{font-size:clamp(22px,6vw,28px);flex-shrink:0;}
+.theme-card-info{flex:1;}
+.theme-card-name{font-size:clamp(7px,2vw,9px);color:#c0c8e8;margin-bottom:4px;}
+.theme-card-desc{font-size:clamp(4px,1.2vw,5px);color:#506080;line-height:1.8;}
+.theme-card-active{font-size:clamp(4px,1.2vw,5px);color:#00b894;margin-top:4px;}
+.theme-card-cost{font-size:clamp(5px,1.4vw,6px);color:#fdcb6e;}
+/* Christmas theme card special bg */
+.theme-card.xmas-card{background:linear-gradient(135deg,rgba(4,18,4,.95) 0%,rgba(20,4,4,.95) 100%);}
+.theme-card.xmas-card.sel{border-color:#ff4444;box-shadow:0 0 14px rgba(255,68,68,.35);}
+
+
+/* ── AVATAR EDITOR TABS ─────────────────────────── */
+.av-tabs{
+  display:flex;width:100%;max-width:360px;flex-shrink:0;
+  margin:8px 0 0;gap:6px;padding:0 clamp(14px,4vw,22px);
+}
+.av-tab{
+  flex:1;text-align:center;padding:8px 4px;
+  font-family:'Press Start 2P',cursive;font-size:clamp(5px,1.5vw,7px);
+  color:#404868;border:1.5px solid rgba(162,155,254,.12);border-radius:6px 6px 0 0;
+  cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:all .12s;background:rgba(4,4,18,.6);
+  border-bottom:none;
+}
+.av-tab.active{color:#a29bfe;border-color:rgba(162,155,254,.35);background:rgba(20,18,50,.9);}
+.av-tab:active{opacity:0.7;}
+
+/* Hair tile canvas */
+.av-hair-canvas{display:block;image-rendering:pixelated;width:100%;height:auto;}
+
+/* ── SHOP SKIN CARDS ─────────────────────────────── */
+.shop-skin-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.shop-skin-card{
+  width:clamp(72px,20vw,88px);
+  border-radius:10px;border:2px solid rgba(162,155,254,.15);
+  cursor:pointer;transition:all .15s;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  position:relative;overflow:hidden;flex-shrink:0;
+  background:rgba(8,6,24,.9);display:flex;flex-direction:column;align-items:center;
+  padding-bottom:6px;
+}
+.shop-skin-card.sel{border-color:#fdcb6e;box-shadow:0 0 12px rgba(253,203,110,.4);}
+.shop-skin-card.locked{opacity:0.85;}
+.shop-skin-card:active{transform:scale(0.95);}
+.shop-skin-glow{position:absolute;inset:0;pointer-events:none;animation:shopGlowPulse 2.5s ease-in-out infinite;}
+@keyframes shopGlowPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+.shop-skin-canvas{display:block;image-rendering:pixelated;width:100%;height:auto;}
+.shop-skin-label{font-size:clamp(5px,1.5vw,6px);color:#c0c8e8;font-family:'Press Start 2P',cursive;margin-top:3px;letter-spacing:.05em;}
+.shop-skin-cost{font-size:clamp(5px,1.4vw,6px);color:#fdcb6e;font-family:'Press Start 2P',cursive;margin-top:2px;}
+.shop-skin-owned{font-size:clamp(4px,1.2vw,5px);color:#00b894;font-family:'Press Start 2P',cursive;margin-top:2px;}
 </style>
 </head>
 <body>
@@ -390,8 +472,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     </div>
   </div>
 
-  <!-- Scrollable customisation cards -->
-  <div class="av-scroll">
+  <!-- Tab bar -->
+  <div class="av-tabs">
+    <div id="avTabCustomize" class="av-tab active" onclick="showAvTab('customize')">✏️ STYLE</div>
+    <div id="avTabShop" class="av-tab" onclick="showAvTab('shop')">🛍️ SKINS</div>
+    <div id="avTabThemes" class="av-tab" onclick="showAvTab('themes')">🎨 THEMES</div>
+  </div>
+
+  <!-- CUSTOMIZE PANEL -->
+  <div id="avCustomizePanel" class="av-scroll">
 
     <!-- Skin Tone -->
     <div class="av-card">
@@ -406,7 +495,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div class="av-card">
       <div class="av-card-header">
         <div class="av-card-title">Hair Style</div>
-        <div class="av-card-sub" id="hairLabel">Hair 1</div>
+        <div class="av-card-sub" id="hairLabel">Classic</div>
       </div>
       <div class="av-hair-grid" id="hairSwatches"></div>
     </div>
@@ -418,6 +507,64 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
         <div class="av-card-sub">🪙 Tap locked to buy</div>
       </div>
       <div class="av-outfit-grid" id="outfitSwatches"></div>
+    </div>
+
+    <!-- Save / Back -->
+    <div class="av-btns">
+      <button onclick="saveAvatar()">✓ SAVE</button>
+      <button onclick="closeAvatarEditor()">← BACK</button>
+    </div>
+
+  </div>
+
+  <!-- SHOP PANEL -->
+  <div id="avShopPanel" class="av-scroll hidden">
+
+    <div class="av-card">
+      <div class="av-card-header">
+        <div class="av-card-title">Base Skin Tone</div>
+        <div class="av-card-sub">Always free</div>
+      </div>
+      <div class="av-skin-grid" id="shopActiveSkin"></div>
+    </div>
+
+    <div class="av-card">
+      <div class="av-card-header">
+        <div class="av-card-title">✨ Premium Skins</div>
+        <div class="av-card-sub">Earn 🪙 by completing levels</div>
+      </div>
+      <div class="shop-skin-grid" id="shopSkinGrid"></div>
+    </div>
+
+    <!-- Save / Back -->
+    <div class="av-btns">
+      <button onclick="saveAvatar()">✓ SAVE</button>
+      <button onclick="closeAvatarEditor()">← BACK</button>
+    </div>
+
+  </div>
+
+  <!-- THEMES PANEL -->
+  <div id="avThemesPanel" class="av-scroll hidden">
+
+    <div class="av-card">
+      <div class="av-card-header">
+        <div class="av-card-title">🎨 UI Themes</div>
+        <div class="av-card-sub">Changes the whole vibe</div>
+      </div>
+      <div class="theme-grid" id="themeGrid"></div>
+    </div>
+
+    <!-- Seasonal shop card (dynamic) -->
+    <div class="av-card seasonal-shop-card" id="seasonalShopCard">
+      <div class="av-card-header">
+        <div class="av-card-title" id="seasonalShopTitle">🎄 Seasonal Shop</div>
+        <div class="av-card-sub" id="seasonalShopSub">Limited edition skins</div>
+      </div>
+      <div class="shop-skin-grid" id="seasonalSkinsPreview"></div>
+      <div style="margin-top:8px;text-align:center;">
+        <button onclick="showAvTab('shop')" style="font-size:clamp(5px,1.4vw,6px);padding:6px 14px;">→ VIEW IN SKINS TAB</button>
+      </div>
     </div>
 
     <!-- Save / Back -->
@@ -568,17 +715,132 @@ const SFX={
 
 // ── AVATAR ────────────────────────────────────────────────────────────────────
 const SKINS=['#f5c5a3','#e8a878','#d4885a','#c06830','#8b4513','#5c2d0a'];
-// Hair styles: null = bald, then 8 colour options
+// Premium skins: unlock with coins (special patterns rendered by drawKidAt)
+const PREMIUM_SKINS=[
+  {id:'ps1',label:'Ghost',     cost:40,  color:'#d0d8f8', glow:'#a0b0ff'},
+  {id:'ps2',label:'Fire',      cost:60,  color:'#ff6030', glow:'#ff9020'},
+  {id:'ps3',label:'Ice',       cost:60,  color:'#80e8ff', glow:'#40c8ff'},
+  {id:'ps4',label:'Shadow',    cost:80,  color:'#2a1e3a', glow:'#9060ff'},
+  {id:'ps5',label:'Gold',      cost:100, color:'#f5d060', glow:'#e0a020'},
+  {id:'ps6',label:'Neon',      cost:100, color:'#20ff80', glow:'#00ff60'},
+  {id:'ps7',label:'Candy',     cost:40,  color:'#ff80c0', glow:'#ff40a0'},
+  {id:'ps8',label:'Toxic',     cost:80,  color:'#00ff00', glow:'#00cc00', noHair:true, blackEyes:true, greenBody:true},
+  // ── CHRISTMAS LIMITED ──────────────────────────────────────────────────────
+  {id:'xmas1',label:'Santa',    cost:60, color:'#f5c5a3', glow:'#ff2020', xmas:true, xmasSkin:'santa', season:'christmas'},
+  {id:'xmas2',label:'Penguin',  cost:60, color:'#1a1a2e', glow:'#74b9ff', xmas:true, xmasSkin:'penguin', noHair:true, blackEyes:true, season:'christmas'},
+  {id:'xmas3',label:'Xmas Kid', cost:80, color:'#f5c5a3', glow:'#ff4444', xmas:true, xmasSkin:'xmaskid', season:'christmas'},
+  // ── VALENTINE'S LIMITED ───────────────────────────────────────────────────
+  {id:'val1',label:'Cupid',       cost:60, color:'#f5c5a3', glow:'#ff6090', season:'valentines', valSkin:'cupid'},
+  {id:'val2',label:'Heartbreaker',cost:70, color:'#f5c5a3', glow:'#ff2060', season:'valentines', valSkin:'heartbreaker'},
+  {id:'val3',label:'Love Bug',    cost:80, color:'#ff80b0', glow:'#ff40a0', season:'valentines', valSkin:'lovebug', noHair:true, blackEyes:true},
+];
+let unlockedSkins=new Set(); // IDs of unlocked premium skins
+
+// ── THEMES ────────────────────────────────────────────────────────────────────
+const THEMES=[
+  {id:'default', label:'Default',  emoji:'🌙', free:true,
+    bg1:'#0d0d2e', bg2:'#04040d', bodyBg:'#04040d',
+    accent:'#a29bfe', accentGlow:'#a29bfe55', border:'rgba(120,120,220,.28)',
+    btnBorder:'#5a4ecc', btnColor:'#9090ee',
+    cardBg:'rgba(8,8,28,.85)', cardBorder:'rgba(162,155,254,.12)',
+    starColor:'#fff', snowflakes:false, mapTint:null,
+    dadSkin:{body:'#2070a0',legs:'#164870',head:'#e8a878',hair:'#686868',accent:'#104060'},
+    momSkin:{body:'#701080',legs:'#3a1040',head:'#e8b098',hair:'#8b3a6a',accent:'#4a0060'},
+  },
+  {id:'christmas', label:'Christmas', emoji:'🎄', free:false, cost:0, season:'christmas',
+    bg1:'#0a1f0a', bg2:'#020d02', bodyBg:'#020d02',
+    accent:'#ff4444', accentGlow:'#ff444455', border:'rgba(180,60,60,.4)',
+    btnBorder:'#cc2020', btnColor:'#ff8080',
+    cardBg:'rgba(4,18,4,.9)', cardBorder:'rgba(200,60,60,.25)',
+    starColor:'#ffee44', snowflakes:true, mapTint:'rgba(0,30,0,0.18)',
+    treeLights:['#ff0000','#00ff00','#ffff00','#0080ff','#ff8000'],
+    dadSkin:{body:'#cc1010',legs:'#2a0808',head:'#e8a878',hair:'#f0f0f0',accent:'#880808', hat:true, hatCol:'#cc1010'},
+    momSkin:{body:'#006600',legs:'#003300',head:'#e8b098',hair:'#f0f0f0',accent:'#004400', antlers:true},
+  },
+  {id:'valentines', label:"Valentine's", emoji:'💝', free:false, cost:0, season:'valentines',
+    bg1:'#2a0a1a', bg2:'#0d0206', bodyBg:'#0d0206',
+    accent:'#ff6090', accentGlow:'#ff609055', border:'rgba(200,80,120,.35)',
+    btnBorder:'#cc2060', btnColor:'#ff90b0',
+    cardBg:'rgba(28,4,14,.9)', cardBorder:'rgba(200,80,120,.22)',
+    starColor:'#ffb0c8', snowflakes:false, hearts:true, mapTint:'rgba(40,0,15,0.15)',
+    dadSkin:{body:'#cc2060',legs:'#880040',head:'#e8a878',hair:'#cc2060',accent:'#880040', hearts:true},
+    momSkin:{body:'#ff80b0',legs:'#cc4080',head:'#e8b098',hair:'#ff40a0',accent:'#cc4080', hearts:true},
+  },
+];
+let currentThemeId='default';
+let unlockedThemes=new Set(['default']);
+function getTheme(){return THEMES.find(t=>t.id===currentThemeId)||THEMES[0];}
+
+function applyTheme(id){
+  currentThemeId=id;
+  const t=getTheme();
+  document.body.style.background=t.bodyBg;
+  document.querySelectorAll('.sbg').forEach(el=>{
+    el.style.background=`radial-gradient(ellipse at 50% 30%,${t.bg1} 0%,${t.bg2} 100%)`;
+  });
+  const root=document.documentElement;
+  root.style.setProperty('--theme-accent',t.accent);
+  root.style.setProperty('--theme-border',t.border);
+  root.style.setProperty('--theme-btn-border',t.btnBorder);
+  root.style.setProperty('--theme-btn-color',t.btnColor);
+  root.style.setProperty('--theme-card-bg',t.cardBg);
+  root.style.setProperty('--theme-card-border',t.cardBorder);
+  document.querySelectorAll('button').forEach(b=>{
+    b.style.borderColor=t.btnBorder;b.style.color=t.btnColor;
+  });
+  // Remove existing ambient particles
+  ['snowContainer','heartContainer'].forEach(id2=>{
+    const el=document.getElementById(id2);if(el)el.remove();
+  });
+  // Snowflakes (Christmas)
+  if(t.snowflakes){
+    const sc=document.createElement('div');sc.id='snowContainer';
+    sc.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:1000;overflow:hidden;';
+    for(let i=0;i<28;i++){
+      const s=document.createElement('div');
+      const sz=Math.random()*6+3,left=Math.random()*100,dur=Math.random()*8+6,delay=Math.random()*10;
+      s.style.cssText=`position:absolute;top:-20px;left:${left}%;width:${sz}px;height:${sz}px;
+        background:#fff;border-radius:50%;opacity:${0.4+Math.random()*0.5};
+        animation:snowFall ${dur}s linear ${delay}s infinite;pointer-events:none;`;
+      sc.appendChild(s);
+    }
+    document.body.appendChild(sc);
+  }
+  // Floating hearts (Valentine's)
+  if(t.hearts){
+    const hc=document.createElement('div');hc.id='heartContainer';
+    hc.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:1000;overflow:hidden;';
+    const heartChars=['♥','♡','💕','💖','💗'];
+    for(let i=0;i<22;i++){
+      const h=document.createElement('div');
+      const sz=Math.random()*14+8,left=Math.random()*100,dur=Math.random()*10+7,delay=Math.random()*12;
+      const col=['#ff6090','#ff90b0','#ff4070','#ffb0c8','#ff2060'][Math.floor(Math.random()*5)];
+      h.textContent=heartChars[Math.floor(Math.random()*heartChars.length)];
+      h.style.cssText=`position:absolute;top:-30px;left:${left}%;font-size:${sz}px;color:${col};
+        opacity:${0.4+Math.random()*0.5};
+        animation:snowFall ${dur}s linear ${delay}s infinite;pointer-events:none;
+        text-shadow:0 0 6px ${col}88;`;
+      hc.appendChild(h);
+    }
+    document.body.appendChild(hc);
+  }
+  saveGameData();
+}
+
+// Hair styles: each has a shape type for distinct pixel art rendering
 const HAIR_STYLES=[
-  {id:'bald',  label:'Bald',    color:null},
-  {id:'h1',    label:'Hair 1',  color:'#3a2210'},
-  {id:'h2',    label:'Hair 2',  color:'#8b5a1a'},
-  {id:'h3',    label:'Hair 3',  color:'#f5d376'},
-  {id:'h4',    label:'Hair 4',  color:'#e84040'},
-  {id:'h5',    label:'Hair 5',  color:'#a855f7'},
-  {id:'h6',    label:'Hair 6',  color:'#60a5fa'},
-  {id:'h7',    label:'Hair 7',  color:'#1e1e22'},
-  {id:'h8',    label:'Hair 8',  color:'#ff9f43'},
+  {id:'bald',   label:'Bald',      color:null,     shape:'bald'},
+  {id:'h1',     label:'Classic',   color:'#3a2210', shape:'classic'},
+  {id:'h2',     label:'Curly',     color:'#8b5a1a', shape:'curly'},
+  {id:'h3',     label:'Blonde',    color:'#f5d376', shape:'classic'},
+  {id:'h4',     label:'Spiky',     color:'#e84040', shape:'spiky'},
+  {id:'h5',     label:'Mohawk',    color:'#a855f7', shape:'mohawk'},
+  {id:'h6',     label:'Ponytail',  color:'#60a5fa', shape:'ponytail'},
+  {id:'h7',     label:'Buzz',      color:'#1e1e22', shape:'buzz'},
+  {id:'h8',     label:'Afro',      color:'#ff9f43', shape:'afro'},
+  {id:'h9',     label:'Braids',    color:'#2a4a8a', shape:'braids'},
+  {id:'h10',    label:'Emo',       color:'#111122', shape:'emo'},
+  {id:'h11',    label:'Wavy',      color:'#c0392b', shape:'wavy'},
 ];
 // Outfits: first 3 free, rest unlock with coins (50 each)
 const OUTFITS=[
@@ -594,14 +856,20 @@ const OUTFITS=[
 ];
 let unlockedOutfits=new Set(['o1','o2','o3']);
 
-let avatar={skin:SKINS[0],hairId:'h1',outfitId:'o1',name:'KID'};
+let avatar={skin:SKINS[0],hairId:'h1',outfitId:'o1',name:'KID',premiumSkinId:null};
 let avTemp={...avatar};
 
 function hairColor(id){return (HAIR_STYLES.find(h=>h.id===id)||HAIR_STYLES[1]).color;}
+function hairShape(id){return (HAIR_STYLES.find(h=>h.id===id)||HAIR_STYLES[1]).shape||'classic';}
 function outfitColor(id){return (OUTFITS.find(o=>o.id===id)||OUTFITS[0]).color;}
 // For drawing: resolve avatar to colours
 function avColors(av){
-  return {skin:av.skin, hair:hairColor(av.hairId), outfit:outfitColor(av.outfitId), name:av.name, hairId:av.hairId};
+  const ps=av.premiumSkinId?PREMIUM_SKINS.find(p=>p.id===av.premiumSkinId):null;
+  const skinCol=ps?ps.color:av.skin;
+  const outfitCol=(ps&&ps.greenBody)?ps.color:outfitColor(av.outfitId);
+  return {skin:skinCol, hair:hairColor(av.hairId), outfit:outfitCol,
+    name:av.name, hairId:av.hairId, hairShape:hairShape(av.hairId),
+    premiumSkin:ps, skinBase:av.skin};
 }
 
 function showAvatarEditor(){
@@ -610,16 +878,27 @@ function showAvatarEditor(){
   buildSkinSwatches();
   buildHairSwatches();
   buildOutfitSwatches();
+  buildShopSkins();
   renderAvPreview();
   updateCoinDisplay();
+  showAvTab('customize');
   document.getElementById('avEditor').classList.remove('hidden');
-  // Scroll back to top
   const scroll=document.querySelector('.av-scroll');
   if(scroll)scroll.scrollTop=0;
+}
+function showAvTab(tab){
+  document.getElementById('avTabCustomize').classList.toggle('active',tab==='customize');
+  document.getElementById('avTabShop').classList.toggle('active',tab==='shop');
+  document.getElementById('avTabThemes').classList.toggle('active',tab==='themes');
+  document.getElementById('avCustomizePanel').classList.toggle('hidden',tab!=='customize');
+  document.getElementById('avShopPanel').classList.toggle('hidden',tab!=='shop');
+  document.getElementById('avThemesPanel').classList.toggle('hidden',tab!=='themes');
+  if(tab==='themes'){buildThemeGrid();buildSeasonalPreview();}
 }
 function closeAvatarEditor(){document.getElementById('avEditor').classList.add('hidden');}
 function saveAvatar(){
   avatar={...avTemp,name:document.getElementById('avName').value.toUpperCase()||'KID'};
+  saveGameData();
   closeAvatarEditor();
 }
 
@@ -641,21 +920,19 @@ function buildHairSwatches(){
     const sel=avTemp.hairId===h.id;
     const tile=document.createElement('div');
     tile.className='av-hair-tile'+(sel?' sel':'');
-    // Color bar at top
-    const bar=document.createElement('div');
-    bar.className='av-hair-color-bar';
-    if(h.color){
-      bar.style.background=h.color;
-    } else {
-      // Bald — scalp pattern
-      bar.style.background='linear-gradient(135deg,#1e1e30 25%,#282848 25%,#282848 50%,#1e1e30 50%,#1e1e30 75%,#282848 75%)';
-      bar.style.backgroundSize='8px 8px';
-    }
+    // Mini canvas preview
+    const cv=document.createElement('canvas');
+    cv.width=54;cv.height=40;cv.className='av-hair-canvas';
+    const c2=cv.getContext('2d');
+    c2.imageSmoothingEnabled=false;
+    c2.fillStyle='#0d0d22';c2.fillRect(0,0,54,40);
+    const previewAv={skin:avTemp.skin||SKINS[0],hair:h.color,outfit:'#5090e0',hairId:h.id,hairShape:h.shape||'classic',premiumSkin:null};
+    drawKidAt(c2,12,10,previewAv,1.9,false,false,0,'down',false);
     // Label at bottom
     const name=document.createElement('div');
     name.className='av-hair-name';
     name.textContent=h.label.toUpperCase();
-    tile.appendChild(bar);
+    tile.appendChild(cv);
     tile.appendChild(name);
     tile.onclick=()=>{
       avTemp.hairId=h.id;
@@ -666,7 +943,6 @@ function buildHairSwatches(){
     };
     wrap.appendChild(tile);
   });
-  // Sync label
   const cur=HAIR_STYLES.find(h=>h.id===avTemp.hairId)||HAIR_STYLES[1];
   const lbEl=document.getElementById('hairLabel');
   if(lbEl)lbEl.textContent=cur.label;
@@ -697,7 +973,7 @@ function buildOutfitSwatches(){
           coins-=o.cost;
           unlockedOutfits.add(o.id);
           updateCoinDisplay();
-          buildOutfitSwatches();
+          buildOutfitSwatches();saveGameData();
           toast('🎽 '+o.label+' unlocked!','#00b894',220);
         } else {
           el.style.outline='2px solid #e74c3c';
@@ -714,12 +990,242 @@ function buildOutfitSwatches(){
   });
 }
 
+function buildThemeGrid(){
+  const grid=document.getElementById('themeGrid');if(!grid)return;
+  grid.innerHTML='';
+  THEMES.forEach(t=>{
+    const unlocked=t.free||unlockedThemes.has(t.id);
+    const sel=currentThemeId===t.id;
+    const card=document.createElement('div');
+    card.className='theme-card'+(sel?' sel':'')+(t.xmas?' xmas-card':'')+(unlocked?'':' locked');
+    // Decorative bg for christmas
+    if(t.xmas){
+      // Twinkling lights strip
+      const lights=document.createElement('div');
+      lights.style.cssText='position:absolute;top:0;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#ff0000 0px,#ff0000 8px,#00cc00 8px,#00cc00 16px,#ffff00 16px,#ffff00 24px,#0080ff 24px,#0080ff 32px);opacity:0.7;';
+      card.appendChild(lights);
+    }
+    const emoji=document.createElement('div');emoji.className='theme-card-emoji';emoji.textContent=t.emoji;
+    const info=document.createElement('div');info.className='theme-card-info';
+    const name=document.createElement('div');name.className='theme-card-name';name.textContent=t.label.toUpperCase();
+    const desc=document.createElement('div');desc.className='theme-card-desc';
+    const descs={default:'Deep space vibes • Purple stars',christmas:'Snow ❄️ • Christmas lights 🎄 • Festive UI',valentines:'Floating hearts 💕 • Rose tones • Romantic UI'};
+    desc.textContent=descs[t.id]||t.label;
+    info.appendChild(name);info.appendChild(desc);
+    if(sel){const act=document.createElement('div');act.className='theme-card-active';act.textContent='✓ ACTIVE';info.appendChild(act);}
+    if(!unlocked){
+      const cost=document.createElement('div');cost.className='theme-card-cost';
+      const freeLabels={christmas:'🎄 Free — tap to unlock!',valentines:'💝 Free — tap to unlock!'};
+      cost.innerHTML=freeLabels[t.id]||'Tap to unlock (free!)';info.appendChild(cost);
+    }
+    card.appendChild(emoji);card.appendChild(info);
+    card.onclick=()=>{
+      if(!unlocked){
+        unlockedThemes.add(t.id);saveGameData();
+        const msgs={christmas:'🎄 Christmas theme unlocked!',valentines:"💝 Valentine's theme unlocked!"};
+        toast(msgs[t.id]||'Theme unlocked!','#ff6090',230);
+      }
+      currentThemeId=t.id;
+      applyTheme(t.id);
+      buildThemeGrid();
+      buildSeasonalPreview();
+    };
+    grid.appendChild(card);
+  });
+}
+
+function buildSeasonalPreview(){
+  // Determine active season — use active theme's season, or fall back to checking all
+  const theme=getTheme();
+  const season=theme.season||null;
+  const seasonalSkins=PREMIUM_SKINS.filter(ps=>ps.season&&(!season||ps.season===season));
+  const card=document.getElementById('seasonalShopCard');
+  const wrap=document.getElementById('seasonalSkinsPreview');
+  if(!wrap||!card)return;
+  wrap.innerHTML='';
+  // Style card by season
+  card.classList.remove('season-christmas','season-valentines');
+  const titleEl=document.getElementById('seasonalShopTitle');
+  const subEl=document.getElementById('seasonalShopSub');
+  if(season==='christmas'){
+    card.classList.add('season-christmas');
+    if(titleEl)titleEl.innerHTML='🎄 Christmas Shop';
+    if(subEl)subEl.textContent='Santa, Penguin & Xmas Kid — limited!';
+  } else if(season==='valentines'){
+    card.classList.add('season-valentines');
+    if(titleEl)titleEl.innerHTML="💝 Valentine's Shop";
+    if(subEl)subEl.textContent='Cupid, Heartbreaker & Love Bug — limited!';
+  } else {
+    if(titleEl)titleEl.innerHTML='🛍️ Seasonal Shop';
+    if(subEl)subEl.textContent='Unlock a seasonal theme to see limited skins';
+  }
+  if(seasonalSkins.length===0){
+    const msg=document.createElement('div');
+    msg.style.cssText='font-size:clamp(5px,1.4vw,6px);color:#506080;padding:8px 0;';
+    msg.textContent='Pick a seasonal theme above to unlock!';
+    wrap.appendChild(msg);return;
+  }
+  const bgCol=season==='valentines'?'#060206':'#060a06';
+  seasonalSkins.forEach(ps=>{
+    const unlocked=unlockedSkins.has(ps.id);
+    const sel=avTemp.premiumSkinId===ps.id;
+    const skinCard=document.createElement('div');
+    skinCard.className='shop-skin-card'+(sel?' sel':'')+(unlocked?'':' locked');
+    const glowDiv=document.createElement('div');glowDiv.className='shop-skin-glow';
+    glowDiv.style.background=`radial-gradient(circle at 50% 40%,${ps.glow}55 0%,transparent 70%)`;
+    skinCard.appendChild(glowDiv);
+    const cv=document.createElement('canvas');cv.width=54;cv.height=50;cv.className='shop-skin-canvas';
+    const c2=cv.getContext('2d');c2.imageSmoothingEnabled=false;
+    c2.fillStyle=bgCol;c2.fillRect(0,0,54,50);
+    const g=c2.createRadialGradient(27,22,0,27,22,20);
+    g.addColorStop(0,ps.glow+'88');g.addColorStop(1,'transparent');
+    c2.fillStyle=g;c2.fillRect(0,0,54,50);
+    const previewAv={skin:ps.color,hair:hairColor(avTemp.hairId),outfit:ps.greenBody?ps.color:outfitColor(avTemp.outfitId),
+      hairId:avTemp.hairId,hairShape:hairShape(avTemp.hairId),premiumSkin:ps};
+    drawKidAt(c2,12,10,previewAv,1.9,false,false,0,'down',false);
+    skinCard.appendChild(cv);
+    const label=document.createElement('div');label.className='shop-skin-label';label.textContent=ps.label;
+    skinCard.appendChild(label);
+    if(!unlocked){
+      const cost=document.createElement('div');cost.className='shop-skin-cost';cost.innerHTML=`🪙 ${ps.cost}`;skinCard.appendChild(cost);
+    } else {
+      const badge=document.createElement('div');badge.className='shop-skin-owned';badge.textContent='OWNED';skinCard.appendChild(badge);
+    }
+    skinCard.onclick=()=>{
+      if(!unlocked){
+        if(coins>=ps.cost){
+          coins-=ps.cost;unlockedSkins.add(ps.id);updateCoinDisplay();
+          avTemp.premiumSkinId=ps.id;
+          buildSeasonalPreview();buildShopSkins();renderAvPreview();saveGameData();
+          toast('✨ '+ps.label+' unlocked!',ps.glow||'#fdcb6e',240);
+        } else {
+          skinCard.style.outline='2px solid #e74c3c';
+          setTimeout(()=>skinCard.style.outline='',700);
+          toast('Not enough coins!','#e74c3c',220);
+        }
+        return;
+      }
+      avTemp.premiumSkinId=sel?null:ps.id;
+      buildSeasonalPreview();renderAvPreview();
+    };
+    wrap.appendChild(skinCard);
+  });
+}
+
+function buildShopSkins(){
+  const wrap=document.getElementById('shopSkinGrid');if(!wrap)return;
+  wrap.innerHTML='';
+  // First: show active normal skins section
+  const skinSec=document.getElementById('shopActiveSkin');
+  if(skinSec){
+    skinSec.innerHTML='';
+    // Show current skin selection
+    SKINS.forEach((col,i)=>{
+      const el=document.createElement('div');
+      el.className='av-skin-sw'+(avTemp.skin===col&&!avTemp.premiumSkinId?' sel':'');
+      el.style.background=col;
+      el.title='Skin Tone '+(i+1);
+      el.onclick=()=>{avTemp.skin=col;avTemp.premiumSkinId=null;buildShopSkins();buildSkinSwatches();renderAvPreview();};
+      skinSec.appendChild(el);
+    });
+  }
+  // Premium skins — regular, then grouped seasonal sections
+  const regularSkins=PREMIUM_SKINS.filter(ps=>!ps.season);
+  const xmasSkins=PREMIUM_SKINS.filter(ps=>ps.season==='christmas');
+  const valSkins=PREMIUM_SKINS.filter(ps=>ps.season==='valentines');
+  const renderSkinCard=(ps)=>{
+    const unlocked=unlockedSkins.has(ps.id);
+    const sel=avTemp.premiumSkinId===ps.id;
+    const card=document.createElement('div');
+    card.className='shop-skin-card'+(sel?' sel':'')+(unlocked?'':' locked');
+
+    // Animated glow bg
+    const glowDiv=document.createElement('div');
+    glowDiv.className='shop-skin-glow';
+    glowDiv.style.background=`radial-gradient(circle at 50% 40%,${ps.glow}55 0%,transparent 70%)`;
+    card.appendChild(glowDiv);
+
+    // Mini preview canvas
+    const cv=document.createElement('canvas');
+    cv.width=54;cv.height=50;cv.className='shop-skin-canvas';
+    const c2=cv.getContext('2d');
+    c2.imageSmoothingEnabled=false;
+    c2.fillStyle='#060612';c2.fillRect(0,0,54,50);
+    // Glow behind character
+    const g=c2.createRadialGradient(27,22,0,27,22,20);
+    g.addColorStop(0,ps.glow+'88');g.addColorStop(1,'transparent');
+    c2.fillStyle=g;c2.fillRect(0,0,54,50);
+    const previewAv={skin:ps.color,hair:hairColor(avTemp.hairId),outfit:ps.greenBody?ps.color:outfitColor(avTemp.outfitId),
+      hairId:avTemp.hairId,hairShape:hairShape(avTemp.hairId),premiumSkin:ps};
+    drawKidAt(c2,12,10,previewAv,1.9,false,false,0,'down',false);
+    card.appendChild(cv);
+
+    const label=document.createElement('div');label.className='shop-skin-label';label.textContent=ps.label;
+    card.appendChild(label);
+
+    if(!unlocked){
+      const cost=document.createElement('div');cost.className='shop-skin-cost';
+      cost.innerHTML=`🪙 ${ps.cost}`;
+      card.appendChild(cost);
+    } else {
+      const badge=document.createElement('div');badge.className='shop-skin-owned';badge.textContent='OWNED';
+      card.appendChild(badge);
+    }
+
+    card.onclick=()=>{
+      if(!unlocked){
+        if(coins>=ps.cost){
+          coins-=ps.cost;
+          unlockedSkins.add(ps.id);
+          updateCoinDisplay();
+          avTemp.premiumSkinId=ps.id;
+          buildShopSkins();renderAvPreview();saveGameData();
+          toast('✨ '+ps.label+' skin unlocked!','#fdcb6e',240);
+        } else {
+          card.style.outline='2px solid #e74c3c';
+          setTimeout(()=>card.style.outline='',700);
+          toast('Not enough coins!','#e74c3c',220);
+        }
+        return;
+      }
+      avTemp.premiumSkinId=sel?null:ps.id;
+      if(!sel&&avTemp.skin)avTemp.skin=avTemp.skin; // keep base skin for fallback
+      buildShopSkins();renderAvPreview();
+    };
+    wrap.appendChild(card);
+  };
+  regularSkins.forEach(renderSkinCard);
+  // Christmas skins section
+  if(xmasSkins.length){
+    const hdr=document.createElement('div');
+    hdr.style.cssText='width:100%;font-size:clamp(5px,1.4vw,6px);color:#ff6060;font-family:"Press Start 2P",cursive;padding:8px 0 4px;letter-spacing:.08em;';
+    hdr.textContent='🎄 CHRISTMAS LIMITED';
+    wrap.appendChild(hdr);
+    xmasSkins.forEach(renderSkinCard);
+  }
+  // Valentine's skins section
+  if(valSkins.length){
+    const hdr=document.createElement('div');
+    hdr.style.cssText='width:100%;font-size:clamp(5px,1.4vw,6px);color:#ff6090;font-family:"Press Start 2P",cursive;padding:8px 0 4px;letter-spacing:.08em;';
+    hdr.textContent="💝 VALENTINE'S LIMITED";
+    wrap.appendChild(hdr);
+    valSkins.forEach(renderSkinCard);
+  }
+}
+
 function renderAvPreview(){
   avTemp.name=document.getElementById('avName').value.toUpperCase()||'KID';
   const avc=document.getElementById('avc');const ctx2=avc.getContext('2d');
   ctx2.clearRect(0,0,110,110);
   ctx2.fillStyle='#0d0d1e';ctx2.fillRect(0,0,110,110);
-  drawKidAt(ctx2,38,26,avColors(avTemp),2.2,false,false,0,'down');
+  const av=avColors(avTemp);
+  // If premium skin active, draw glow behind
+  if(av.premiumSkin){
+    const g=ctx2.createRadialGradient(55,45,0,55,45,38);
+    g.addColorStop(0,av.premiumSkin.glow+'66');g.addColorStop(1,'transparent');
+    ctx2.fillStyle=g;ctx2.fillRect(0,0,110,110);
+  }
+  drawKidAt(ctx2,38,26,av,2.2,false,false,0,'down');
   ctx2.fillStyle='rgba(255,255,255,0.7)';ctx2.font='bold 7px monospace';ctx2.textAlign='center';
   ctx2.fillText(avTemp.name,55,105);
 }
@@ -783,21 +1289,109 @@ function drawKidAt(ctx,x,y,av,scale,hasPhone,hidden,walkFrame,facing,hasTablet){
   ctx.fillRect(x+2*s,y-4*s,W-4*s,10*s);
   // subtle chin shadow
   ctx.fillStyle='rgba(0,0,0,0.08)';ctx.fillRect(x+3*s,y+4*s,W-6*s,2*s);
+  // ── PREMIUM SKIN EFFECTS ──
+  if(av.premiumSkin){
+    ctx.save();ctx.globalAlpha=0.22+0.08*Math.sin(Date.now()*0.003);
+    ctx.fillStyle=av.premiumSkin.glow;
+    ctx.fillRect(x-s,y-5*s,W+2*s,H+8*s);
+    ctx.globalAlpha=1;ctx.restore();
+  }
   // ── HAIR ──
-  if(av.hair){
-    // Hair top block
-    ctx.fillStyle=av.hair;
-    ctx.fillRect(x+2*s,y-5*s,W-4*s,5*s);
-    // Side tufts
-    ctx.fillRect(x+1*s,y-3*s,2*s,7*s);
-    ctx.fillRect(x+W-3*s,y-3*s,2*s,7*s);
-    // Fringe detail (darker shade)
-    ctx.fillStyle=lighter(av.hair,'-25');
-    ctx.fillRect(x+3*s,y-1*s,3*s,2*s);
-    ctx.fillRect(x+W-6*s,y-1*s,3*s,2*s);
+  const shape=av.hairShape||'classic';
+  if(av.hair && !(av.premiumSkin && av.premiumSkin.noHair)){
+    const hc=av.hair, hd=lighter(hc,'-30'), hl=lighter(hc,'20');
+    ctx.fillStyle=hc;
+    if(shape==='classic'){
+      ctx.fillRect(x+2*s,y-5*s,W-4*s,5*s);
+      ctx.fillRect(x+1*s,y-3*s,2*s,7*s);ctx.fillRect(x+W-3*s,y-3*s,2*s,7*s);
+      ctx.fillStyle=hd;ctx.fillRect(x+3*s,y-1*s,3*s,2*s);ctx.fillRect(x+W-6*s,y-1*s,3*s,2*s);
+    } else if(shape==='spiky'){
+      // Spiky top — individual spikes
+      ctx.fillStyle=hc;
+      for(let i=0;i<4;i++){const sx2=x+(2+i*3)*s;ctx.fillRect(sx2,y-(6+i%2*3)*s,2*s,(5+i%2*2)*s);}
+      ctx.fillRect(x+1*s,y-3*s,2*s,6*s);ctx.fillRect(x+W-3*s,y-3*s,2*s,6*s);
+      ctx.fillStyle=hl;ctx.fillRect(x+2*s,y-5*s,1*s,3*s);ctx.fillRect(x+5*s,y-7*s,1*s,3*s);
+    } else if(shape==='curly'){
+      // Curly — bumpy top
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+2*s,y-4*s,W-4*s,4*s);
+      // Bumps
+      for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(x+(4+i*4)*s,y-4*s,2*s,Math.PI,0);ctx.fill();}
+      ctx.fillStyle=hd;ctx.fillRect(x+1*s,y-2*s,2*s,5*s);ctx.fillRect(x+W-3*s,y-2*s,2*s,5*s);
+      ctx.fillStyle=hl;for(let i=0;i<3;i++){ctx.fillRect(x+(3+i*4)*s,y-5*s,1*s,1*s);}
+    } else if(shape==='mohawk'){
+      // Mohawk — tall center strip
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+Math.round(W/2)-s,y-9*s,3*s,9*s);
+      ctx.fillRect(x+Math.round(W/2)-2*s,y-7*s,5*s,5*s);
+      // Shaved sides (darker skin)
+      ctx.fillStyle=lighter(av.skin,'-15');
+      ctx.fillRect(x+1*s,y-4*s,Math.round(W/2)-3*s,4*s);
+      ctx.fillRect(x+Math.round(W/2)+2*s,y-4*s,Math.round(W/2)-3*s,4*s);
+      ctx.fillStyle=hl;ctx.fillRect(x+Math.round(W/2)-s,y-8*s,1*s,4*s);
+    } else if(shape==='ponytail'){
+      // Ponytail — back trail
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+2*s,y-5*s,W-4*s,5*s);
+      ctx.fillRect(x+1*s,y-3*s,2*s,7*s);ctx.fillRect(x+W-3*s,y-3*s,2*s,7*s);
+      // Tail hanging on right
+      ctx.fillRect(x+W-2*s,y,3*s,8*s);
+      ctx.fillStyle=hd;ctx.fillRect(x+W-1*s,y+8*s,2*s,3*s);
+      ctx.fillStyle=hl;ctx.fillRect(x+3*s,y-4*s,2*s,2*s);
+    } else if(shape==='buzz'){
+      // Buzz cut — very short stubble
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+2*s,y-3*s,W-4*s,3*s);
+      ctx.fillRect(x+1*s,y-2*s,2*s,4*s);ctx.fillRect(x+W-3*s,y-2*s,2*s,4*s);
+      ctx.fillStyle=hd;
+      // Stubble dots
+      for(let i=0;i<4;i++)ctx.fillRect(x+(3+i*3)*s,y-2*s,s,s);
+    } else if(shape==='afro'){
+      // Afro — wide puffy cloud
+      ctx.fillStyle=hc;
+      ctx.fillRect(x-s,y-7*s,W+2*s,7*s);
+      // Extra puffs on sides
+      ctx.fillRect(x-2*s,y-5*s,3*s,6*s);ctx.fillRect(x+W-s,y-5*s,3*s,6*s);
+      // Bumpy top
+      for(let i=0;i<4;i++){ctx.beginPath();ctx.arc(x+(1+i*4)*s,y-7*s,2.5*s,Math.PI,0);ctx.fill();}
+      ctx.fillStyle=hd;ctx.fillRect(x,y-5*s,2*s,4*s);ctx.fillRect(x+W-2*s,y-5*s,2*s,4*s);
+      ctx.fillStyle=hl;for(let i=0;i<3;i++)ctx.fillRect(x+(2+i*4)*s,y-8*s,s,2*s);
+    } else if(shape==='braids'){
+      // Braids — cornrow pattern
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+2*s,y-5*s,W-4*s,5*s);
+      // Braid lines
+      ctx.fillStyle=hd;
+      for(let i=0;i<3;i++)ctx.fillRect(x+(3+i*4)*s,y-5*s,s,5*s);
+      // Dangling braids
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+1*s,y-1*s,2*s,7*s);ctx.fillRect(x+W-3*s,y-1*s,2*s,7*s);
+      ctx.fillStyle=hd;ctx.fillRect(x+1*s,y+1*s,s,s);ctx.fillRect(x+1*s,y+3*s,s,s);ctx.fillRect(x+1*s,y+5*s,s,s);
+      ctx.fillRect(x+W-3*s,y+1*s,s,s);ctx.fillRect(x+W-3*s,y+3*s,s,s);ctx.fillRect(x+W-3*s,y+5*s,s,s);
+    } else if(shape==='emo'){
+      // Emo — long swept fringe covering one eye
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+2*s,y-6*s,W-4*s,6*s);
+      // Heavy swept fringe
+      ctx.fillRect(x,y-4*s,W-2*s,8*s);
+      ctx.fillRect(x+1*s,y-3*s,2*s,8*s);
+      ctx.fillStyle=hd;ctx.fillRect(x,y-2*s,2*s,4*s);
+    } else if(shape==='wavy'){
+      // Wavy — flowing waves
+      ctx.fillStyle=hc;
+      ctx.fillRect(x+1*s,y-5*s,W-2*s,5*s);
+      ctx.fillRect(x,y-3*s,3*s,7*s);ctx.fillRect(x+W-3*s,y-3*s,3*s,7*s);
+      // Wave detail
+      ctx.fillStyle=hd;
+      for(let i=0;i<3;i++)ctx.fillRect(x+(2+i*5)*s,y-2*s,3*s,s);
+      ctx.fillStyle=hl;
+      for(let i=0;i<2;i++)ctx.fillRect(x+(4+i*5)*s,y-4*s,2*s,s);
+    }
   }
   // ── EYES ──
-  ctx.fillStyle='#1a1a22';
+  const eyeCol=(av.premiumSkin&&av.premiumSkin.blackEyes)?'#000000':'#1a1a22';
+  const eyeGlint=!(av.premiumSkin&&av.premiumSkin.blackEyes);
+  ctx.fillStyle=eyeCol;
   if(facing==='left'){
     ctx.fillRect(x+1*s,y+1*s,2*s,2*s);
   } else if(facing==='right'){
@@ -806,10 +1400,208 @@ function drawKidAt(ctx,x,y,av,scale,hasPhone,hidden,walkFrame,facing,hasTablet){
     const ey=facing==='up'?(y-1*s):(y+1*s);
     ctx.fillRect(x+3*s,ey,2*s,2*s);
     ctx.fillRect(x+W-5*s,ey,2*s,2*s);
-    // eye glint
-    ctx.fillStyle='rgba(255,255,255,0.55)';
-    ctx.fillRect(x+3*s,ey,1*s,1*s);
-    ctx.fillRect(x+W-5*s,ey,1*s,1*s);
+    // eye glint (suppressed for blackEyes skins)
+    if(eyeGlint){
+      ctx.fillStyle='rgba(255,255,255,0.55)';
+      ctx.fillRect(x+3*s,ey,1*s,1*s);
+      ctx.fillRect(x+W-5*s,ey,1*s,1*s);
+    }
+  }
+  // ── CHRISTMAS SKIN OVERLAYS ──
+  if(av.premiumSkin&&av.premiumSkin.xmasSkin){
+    const xs=av.premiumSkin.xmasSkin;
+    if(xs==='santa'){
+      // Red coat over body (already drawn with outfit, add trim)
+      ctx.fillStyle='#cc1010';
+      ctx.fillRect(x,y+5*s,W,H-12*s); // red coat
+      ctx.fillStyle='#f0f0f0'; // white trim
+      ctx.fillRect(x,y+5*s,W,2*s);   // collar trim
+      ctx.fillRect(x,y+H-7*s,W,2*s); // coat bottom trim
+      ctx.fillRect(x,y+5*s,2*s,H-12*s); // left trim
+      ctx.fillRect(x+W-2*s,y+5*s,2*s,H-12*s); // right trim
+      // Belt
+      ctx.fillStyle='#1a1a1a';ctx.fillRect(x+2*s,y+H-11*s,W-4*s,3*s);
+      ctx.fillStyle='#e0a020';ctx.fillRect(x+W/2-2*s,y+H-11*s,4*s,3*s); // buckle
+      // Santa hat
+      ctx.fillStyle='#cc1010';ctx.fillRect(x+2*s,y-8*s,W-4*s,6*s);
+      ctx.fillRect(x+4*s,y-12*s,W-8*s,5*s);
+      ctx.fillRect(x+6*s,y-15*s,W-12*s,4*s);
+      ctx.fillRect(x+8*s,y-17*s,4*s,3*s); // hat tip
+      ctx.fillStyle='#f0f0f0'; // hat brim
+      ctx.fillRect(x+1*s,y-8*s,W-2*s,3*s);
+      ctx.fillStyle='#f0f0f0'; // pompom
+      ctx.fillRect(x+7*s,y-18*s,3*s,3*s);
+      // White beard
+      ctx.fillStyle='#f0f0f0';
+      ctx.fillRect(x+2*s,y+2*s,W-4*s,4*s);
+      ctx.fillRect(x+3*s,y+5*s,4*s,3*s);
+      ctx.fillRect(x+W-7*s,y+5*s,4*s,3*s);
+    } else if(xs==='penguin'){
+      // Penguin body — black tuxedo
+      ctx.fillStyle='#111120';
+      ctx.fillRect(x,y+5*s,W,H-12*s);
+      // White tummy
+      ctx.fillStyle='#e8eef8';
+      ctx.fillRect(x+3*s,y+5*s,W-6*s,H-14*s);
+      // Black legs
+      ctx.fillStyle='#111120';
+      ctx.fillRect(x+2*s,y+H-7*s,4*s,7*s);
+      ctx.fillRect(x+W-6*s,y+H-7*s,4*s,7*s);
+      // Orange feet
+      ctx.fillStyle='#ff8800';
+      ctx.fillRect(x,y+H-3*s,6*s,3*s);
+      ctx.fillRect(x+W-6*s,y+H-3*s,6*s,3*s);
+      // Penguin head — white face
+      ctx.fillStyle='#111120';ctx.fillRect(x+2*s,y-4*s,W-4*s,10*s);
+      ctx.fillStyle='#e8eef8';ctx.fillRect(x+3*s,y-2*s,W-6*s,7*s); // white face
+      // Orange beak
+      ctx.fillStyle='#ff8800';
+      ctx.fillRect(x+W/2-2*s,y+1*s,4*s,2*s);
+      // Eyes (already drawn)
+      // Santa hat on penguin
+      ctx.fillStyle='#cc1010';ctx.fillRect(x+2*s,y-8*s,W-4*s,5*s);
+      ctx.fillStyle='#f0f0f0';ctx.fillRect(x+1*s,y-8*s,W-2*s,2*s);
+      ctx.fillStyle='#cc1010';ctx.fillRect(x+5*s,y-12*s,W-10*s,5*s);
+      ctx.fillStyle='#f0f0f0';ctx.fillRect(x+7*s,y-14*s,3*s,3*s);
+      // Scarf
+      ctx.fillStyle='#cc1010';ctx.fillRect(x+1*s,y+4*s,W-2*s,2*s);
+      ctx.fillStyle='#f0f0f0';ctx.fillRect(x+3*s,y+4*s,2*s,2*s);ctx.fillRect(x+7*s,y+4*s,2*s,2*s);
+    } else if(xs==='xmaskid'){
+      // Christmas lights strung around body
+      const lightCols=['#ff0000','#00dd00','#ffcc00','#0080ff','#ff6600'];
+      // String
+      ctx.strokeStyle='rgba(180,180,180,0.5)';ctx.lineWidth=s*0.7;
+      ctx.beginPath();
+      ctx.moveTo(x+2*s,y-2*s);
+      ctx.bezierCurveTo(x+W/2,y+3*s, x+W/2,y+3*s, x+W-2*s,y-2*s);
+      ctx.bezierCurveTo(x+W,y+7*s, x+W,y+7*s, x+W-2*s,y+H-9*s);
+      ctx.bezierCurveTo(x+W/2,y+H-7*s, x+W/2,y+H-7*s, x+2*s,y+H-9*s);
+      ctx.stroke();
+      // Bulbs
+      const bulbPositions=[
+        {bx:x+3*s,by:y-1*s},{bx:x+W/2-s,by:y+4*s},{bx:x+W-4*s,by:y-1*s},
+        {bx:x+W-2*s,by:y+7*s},{bx:x+W-3*s,by:y+H-10*s},
+        {bx:x+W/2,by:y+H-8*s},{bx:x+2*s,by:y+H-10*s},{bx:x+2*s,by:y+7*s},
+      ];
+      bulbPositions.forEach(({bx,by},i)=>{
+        const lc=lightCols[i%lightCols.length];
+        // Glow
+        ctx.save();ctx.globalAlpha=0.35+0.2*Math.sin(Date.now()*0.004+i);
+        const lg=ctx.createRadialGradient(bx,by,0,bx,by,4*s);
+        lg.addColorStop(0,lc);lg.addColorStop(1,'transparent');
+        ctx.fillStyle=lg;ctx.fillRect(bx-4*s,by-4*s,8*s,8*s);
+        ctx.globalAlpha=1;ctx.restore();
+        // Bulb
+        ctx.fillStyle=lc;ctx.fillRect(bx-s,by-s,2*s,2*s);
+        // Cap
+        ctx.fillStyle='#888';ctx.fillRect(bx-s/2,by-s*2,s,s);
+      });
+      // Festive green scarf
+      ctx.fillStyle='#006600';ctx.fillRect(x+1*s,y+3*s,W-2*s,3*s);
+      ctx.fillStyle='#ff0000';
+      for(let i=0;i<4;i++)ctx.fillRect(x+(2+i*4)*s,y+3*s,2*s,3*s);
+    }
+  }
+  // ── VALENTINE SKIN OVERLAYS ──
+  if(av.premiumSkin&&av.premiumSkin.valSkin){
+    const vs=av.premiumSkin.valSkin;
+    if(vs==='cupid'){
+      // White toga draped over body
+      ctx.fillStyle='#f0f0ff';
+      ctx.fillRect(x,y+5*s,W,H-12*s);
+      ctx.fillStyle='#e8d0e8'; // toga shadow fold
+      ctx.fillRect(x+W-4*s,y+5*s,4*s,H-12*s);
+      ctx.fillStyle='#d4b8d0';
+      ctx.fillRect(x+2*s,y+5*s,2*s,H-12*s);
+      // Gold sash belt
+      ctx.fillStyle='#e0a820';ctx.fillRect(x,y+H-11*s,W,2*s);
+      ctx.fillStyle='#f8c840';ctx.fillRect(x+2*s,y+H-11*s,2*s,2*s);
+      // Tiny wings behind back (drawn first = behind)
+      ctx.fillStyle='#f8f0ff';
+      ctx.fillRect(x-3*s,y+5*s,3*s,8*s);ctx.fillRect(x+W,y+5*s,3*s,8*s);
+      ctx.fillStyle='#e8d8f8';
+      ctx.fillRect(x-4*s,y+6*s,2*s,6*s);ctx.fillRect(x+W+2*s,y+6*s,2*s,6*s);
+      ctx.fillStyle='#d0c0e8'; // wing tips
+      ctx.fillRect(x-4*s,y+11*s,3*s,2*s);ctx.fillRect(x+W+1*s,y+11*s,3*s,2*s);
+      // Gold laurel wreath on head
+      ctx.fillStyle='#c8a020';
+      ctx.fillRect(x+1*s,y-5*s,W-2*s,2*s);
+      ctx.fillStyle='#e0b828';
+      for(let i=0;i<4;i++)ctx.fillRect(x+(2+i*4)*s,y-6*s,2*s,2*s);
+      // Pink cheeks
+      ctx.fillStyle='rgba(255,130,150,0.4)';
+      ctx.fillRect(x+2*s,y+1*s,3*s,2*s);ctx.fillRect(x+W-5*s,y+1*s,3*s,2*s);
+      // Tiny bow & arrow
+      ctx.fillStyle='#c8a020';ctx.fillRect(x+W+2*s,y+2*s,s,10*s); // bow stick
+      ctx.fillStyle='#f0c030';ctx.fillRect(x+W+1*s,y+2*s,3*s,s);ctx.fillRect(x+W+1*s,y+11*s,3*s,s);
+      ctx.fillStyle='rgba(200,180,220,0.7)'; // bow string
+      ctx.fillRect(x+W+2*s,y+2*s,s,10*s);
+      ctx.fillStyle='#ff4060'; // arrow
+      ctx.fillRect(x+W-4*s,y+5*s,8*s,s);
+      ctx.fillRect(x+W+3*s,y+4*s,s,3*s); // arrowhead
+    } else if(vs==='heartbreaker'){
+      // Sleek red suit
+      ctx.fillStyle='#cc1040';
+      ctx.fillRect(x,y+5*s,W,H-12*s);
+      // Suit lapels
+      ctx.fillStyle='#ff2060';
+      ctx.fillRect(x+3*s,y+5*s,3*s,8*s);ctx.fillRect(x+W-6*s,y+5*s,3*s,8*s);
+      ctx.fillStyle='#880028';
+      ctx.fillRect(x,y+5*s,W,2*s); // collar
+      // Rose in pocket
+      ctx.fillStyle='#ff4080';ctx.fillRect(x+W-5*s,y+7*s,2*s,3*s);
+      ctx.fillStyle='#006620';ctx.fillRect(x+W-5*s,y+9*s,s,3*s); // stem
+      // Black bow tie
+      ctx.fillStyle='#111';
+      ctx.fillRect(x+W/2-3*s,y+5*s,6*s,2*s);
+      ctx.fillRect(x+W/2-4*s,y+4*s,3*s,4*s);ctx.fillRect(x+W/2+s,y+4*s,3*s,4*s);
+      // Heart on chest
+      ctx.fillStyle='#ff80a0';
+      ctx.fillRect(x+W/2-2*s,y+9*s,4*s,3*s);
+      ctx.fillRect(x+W/2-3*s,y+8*s,2*s,2*s);ctx.fillRect(x+W/2+s,y+8*s,2*s,2*s);
+      ctx.fillRect(x+W/2-s,y+11*s,2*s,s);
+      // Slick hair with red streak
+      ctx.fillStyle='#1a1a1a';
+      ctx.fillRect(x+2*s,y-6*s,W-4*s,6*s);
+      ctx.fillRect(x+1*s,y-4*s,2*s,6*s);ctx.fillRect(x+W-3*s,y-4*s,2*s,6*s);
+      ctx.fillStyle='#cc1040'; // red streak
+      ctx.fillRect(x+3*s,y-5*s,2*s,5*s);
+      // Pink cheeks
+      ctx.fillStyle='rgba(255,100,130,0.4)';
+      ctx.fillRect(x+2*s,y+1*s,3*s,2*s);ctx.fillRect(x+W-5*s,y+1*s,3*s,2*s);
+    } else if(vs==='lovebug'){
+      // Round bug body — deep pink
+      ctx.fillStyle='#ff3070';
+      ctx.fillRect(x-s,y+4*s,W+2*s,H-10*s); // round body
+      ctx.fillStyle='#ff6090'; // belly highlight
+      ctx.fillRect(x+2*s,y+6*s,W-4*s,H-14*s);
+      // Heart spots on body
+      const hSpots=[{bx:x+3*s,by:y+8*s},{bx:x+W-6*s,by:y+7*s},{bx:x+W/2-s,by:y+13*s}];
+      hSpots.forEach(({bx,by})=>{
+        ctx.fillStyle='#cc0040';
+        ctx.fillRect(bx,by,3*s,2*s);
+        ctx.fillRect(bx-s,by-s,2*s,2*s);ctx.fillRect(bx+2*s,by-s,2*s,2*s);
+        ctx.fillRect(bx+s,by+2*s,s,s);
+      });
+      // Antennae with heart tips
+      ctx.fillStyle='#880028';
+      ctx.fillRect(x+3*s,y-6*s,s,5*s);ctx.fillRect(x+W-4*s,y-6*s,s,5*s);
+      ctx.fillStyle='#ff4070'; // heart tips
+      ctx.fillRect(x+2*s,y-8*s,3*s,2*s);ctx.fillRect(x+W-5*s,y-8*s,3*s,2*s);
+      ctx.fillRect(x+s,y-7*s,2*s,s);ctx.fillRect(x+4*s,y-7*s,2*s,s);
+      ctx.fillRect(x+W-6*s,y-7*s,2*s,s);ctx.fillRect(x+W-2*s,y-7*s,2*s,s);
+      // Cute round head — pink
+      ctx.fillStyle='#ff3070';ctx.fillRect(x+s,y-5*s,W-2*s,11*s);
+      ctx.fillStyle='#ff6090';ctx.fillRect(x+3*s,y-3*s,W-6*s,7*s); // face
+      // Chubby cheeks
+      ctx.fillStyle='rgba(255,150,180,0.6)';
+      ctx.fillRect(x+s,y+s,3*s,2*s);ctx.fillRect(x+W-4*s,y+s,3*s,2*s);
+      // Wings
+      ctx.fillStyle='rgba(255,220,235,0.7)';
+      ctx.fillRect(x-4*s,y+3*s,4*s,7*s);ctx.fillRect(x+W,y+3*s,4*s,7*s);
+      ctx.fillStyle='rgba(255,160,190,0.5)';
+      ctx.fillRect(x-3*s,y+4*s,2*s,5*s);ctx.fillRect(x+W+s,y+4*s,2*s,5*s);
+    }
   }
   // ── PIXEL PHONE (based on reference image) ──
   if(hasPhone){
@@ -896,6 +1688,33 @@ function lighter(hex,amt){
 // ── EARLY DECLARATIONS (needed before first use) ──────────────────────────────
 const GAME_VERSION='v1.5.0';
 let coins=0;
+
+// ── SAVE / LOAD ───────────────────────────────────────────────────────────────
+function saveGameData(){
+  try{
+    localStorage.setItem('pmb_save',JSON.stringify({
+      coins,
+      avatar,
+      currentThemeId,
+      unlockedSkins:[...unlockedSkins],
+      unlockedThemes:[...unlockedThemes],
+      unlockedOutfits:[...unlockedOutfits],
+    }));
+  }catch(e){}
+}
+function loadGameData(){
+  try{
+    const raw=localStorage.getItem('pmb_save');
+    if(!raw)return;
+    const d=JSON.parse(raw);
+    if(d.coins!=null)coins=d.coins;
+    if(d.avatar)avatar={...avatar,...d.avatar};
+    if(d.currentThemeId)currentThemeId=d.currentThemeId;
+    if(d.unlockedSkins)unlockedSkins=new Set(d.unlockedSkins);
+    if(d.unlockedThemes)unlockedThemes=new Set(d.unlockedThemes);
+    if(d.unlockedOutfits)unlockedOutfits=new Set(d.unlockedOutfits);
+  }catch(e){}
+}
 let difficulty='medium'; // 'easy' | 'medium' | 'hard'
 const UPDATE_LOG=[
   {ver:'v1.5.0',date:'Feb 2025',notes:[
@@ -1215,10 +2034,10 @@ const FURN=[
   {x:60, y:260,w:60,h:60, type:'fridge',            col:'#384448'},
   {x:130,y:260,w:80,h:40, type:'counter',           col:'#5a4038'},
   {x:60, y:340,w:70,h:50, type:'stove',             col:'#383c3e'},
-  {x:60, y:440,w:100,h:60,type:'sofa',   hide:true, col:'#5a2230'},
-  {x:60, y:520,w:60,h:60, type:'sofa',   hide:true, col:'#4a1820'},
-  {x:170,y:460,w:40,h:50, type:'tv',                col:'#141618'},
-  {x:120,y:520,w:50,h:40, type:'table',             col:'#4a3020'},
+  {x:55, y:435,w:100,h:55,type:'sofa',   hide:true, col:'#5a2230'},
+  {x:60, y:530,w:60,h:55, type:'sofa',   hide:true, col:'#4a1820'},
+  {x:168,y:452,w:40,h:50, type:'tv',                col:'#141618'},
+  {x:130,y:527,w:45,h:40, type:'table',             col:'#4a3020'},
   {x:320,y:60, w:100,h:100,type:'bed',   hide:true, col:'#3a2460'},
   {x:320,y:180,w:60,h:30, type:'dresser',           col:'#4a2c18'},
   {x:390,y:180,w:40,h:30, type:'table',             col:'#3a2010'},
@@ -1286,7 +2105,8 @@ const P={x:0,y:0,w:14,h:18,spd:1.2,rspd:2.0,vx:0,vy:0,hidden:false,hasPhone:fals
 
 function mkGuard(){return{x:0,y:0,w:16,h:20,spd:0.8,rspd:1.3,state:'patrol',pts:[],
   cp:0,wt:0,ix:0,iy:0,vis:140,vang:Math.PI/2.5,facing:0,running:false,wf:0,wtt:0,
-  sleeping:false,st:0,sc:0,scLen:500,active:false,isMom:false};}
+  sleeping:false,st:0,sc:0,scLen:500,active:false,isMom:false,
+  stuckFrames:0,lastX:0,lastY:0};}
 const DAD=mkGuard();
 const MOM={...mkGuard(),isMom:true};
 
@@ -1413,12 +2233,14 @@ function loadLevel(idx){
   // DAD
   const ld=lvl.dad;
   Object.assign(DAD,{x:ld.x,y:ld.y,spd:ld.spd,rspd:ld.rspd,vis:ld.vis,pts:ld.patrol,
-    state:'patrol',cp:0,wt:0,sleeping:false,st:0,sc:0,scLen:ld.sleepIn,running:false,wf:0,wtt:0,active:true,isMom:false});
+    state:'patrol',cp:0,wt:0,sleeping:false,st:0,sc:0,scLen:ld.sleepIn,running:false,wf:0,wtt:0,active:true,isMom:false,
+    stuckFrames:0,lastX:ld.x,lastY:ld.y});
   // MOM
   if(lvl.mom){
     const lm=lvl.mom;
     Object.assign(MOM,{x:lm.x,y:lm.y,spd:lm.spd,rspd:lm.rspd,vis:lm.vis,pts:lm.patrol,
-      state:'patrol',cp:0,wt:0,sleeping:false,st:0,sc:0,scLen:lm.sleepIn||280,running:false,wf:0,wtt:0,active:true,isMom:true});
+      state:'patrol',cp:0,wt:0,sleeping:false,st:0,sc:0,scLen:lm.sleepIn||280,running:false,wf:0,wtt:0,active:true,isMom:true,
+      stuckFrames:0,lastX:lm.x,lastY:lm.y});
   } else {MOM.active=false;}
   // PLAYER
   P.x=lvl.playerStart.x;P.y=lvl.playerStart.y;
@@ -1470,7 +2292,7 @@ function levelWin(){
   gr=false;streak++;SFX.levelup();
   const el=Math.floor((gt-lvlStart)/60);totalTime+=gt-lvlStart;
   // Award coins
-  coins+=30;updateCoinDisplay();
+  coins+=30;updateCoinDisplay();saveGameData();
   playTone(880,'sine',0.06,0.15);playTone(1100,'sine',0.08,0.12,0.07);
   document.getElementById('lwmoon').textContent=LEVELS[curLvl].moon;
   document.getElementById('lwtitle').textContent='LEVEL '+LEVELS[curLvl].num+' CLEAR!';
@@ -1902,6 +2724,7 @@ function moveGuard(g,tx,ty,spd){
   if(d<1)return;
   const ux=dx/d, uy=dy/d;
   const nx=g.x+ux*spd, ny=g.y+uy*spd;
+  const prevX=g.x, prevY=g.y;
   // Try full move, then axis-separated fallbacks
   if     (!cwGuard(nx,ny,g.w,g.h)) { g.x=nx; g.y=ny; }
   else if(!cwGuard(nx,g.y,g.w,g.h)){ g.x=nx; }
@@ -1917,6 +2740,19 @@ function moveGuard(g,tx,ty,spd){
       if(nn){ const dd=dst(g.x,g.y,nn.x,nn.y); if(dd>5){ g.x+=(nn.x-g.x)/dd*spd; g.y+=(nn.y-g.y)/dd*spd; }}
     }
   }
+  // ── STUCK DETECTION ───────────────────────────────────────────────
+  // Track movement; if guard barely moves for ~90 frames, send them to bed
+  const moved=dst(g.x,g.y,g.lastX||g.x,g.lastY||g.y);
+  if(moved<0.3){
+    g.stuckFrames=(g.stuckFrames||0)+1;
+    if(g.stuckFrames>90&&g.state!=='sleeping'&&g.state!=='goingTobed'){
+      g.state='goingTobed'; g.sc=0; g.stuckFrames=0;
+      toast(`😴 ${g.isMom?'Mom':'Dad'} gave up and went to bed…`,'#a29bfe',240);
+    }
+  } else {
+    g.stuckFrames=0;
+  }
+  g.lastX=g.x; g.lastY=g.y;
   g.facing=Math.atan2(uy,ux);
   g.wtt++; if(g.wtt>7){ g.wf=(g.wf+1)%4; g.wtt=0; SFX.footstep(); }
 }
@@ -2246,19 +3082,58 @@ function drawGuard(g,isMom){
   const x=Math.round(g.x),y=Math.round(g.y);
   const alert=g.state==='chase',goingBed=g.state==='goingTobed'&&!g.sleeping;
   const leg=[0,2,0,-2][g.wf];
+  const theme=getTheme();
+  const sk=isMom?(theme.momSkin||theme.dadSkin):theme.dadSkin;
+
   ctx.fillStyle='rgba(0,0,0,0.22)';ctx.beginPath();ctx.ellipse(x+g.w/2,y+g.h+1,8,3,0,0,Math.PI*2);ctx.fill();
   // Legs
-  ctx.fillStyle=alert?'#5a0000':isMom?'#3a1040':'#164870';
+  ctx.fillStyle=alert?'#5a0000':sk.legs;
   ctx.fillRect(x+2,y+g.h-9+leg,5,9);ctx.fillRect(x+g.w-7,y+g.h-9-leg,5,9);
   // Body / robe
-  const bodyCol=alert?'#b03020':goingBed?'#354050':isMom?'#701080':'#2070a0';
+  const bodyCol=alert?'#b03020':goingBed?'#354050':sk.body;
   ctx.fillStyle=bodyCol;ctx.fillRect(x,y+6,g.w,g.h-13);
   ctx.fillStyle='rgba(255,255,255,0.06)';ctx.fillRect(x,y+6,g.w,4);
-  ctx.fillStyle=alert?'#6a1008':isMom?'#4a0060':'#104060';ctx.fillRect(x,y+16,g.w,3);
+  ctx.fillStyle=alert?'#6a1008':sk.accent;ctx.fillRect(x,y+16,g.w,3);
+
+  // ── THEME ACCESSORIES (drawn behind head) ──
+  if(!alert&&!g.sleeping){
+    if(sk.hat){
+      // Santa hat on guard
+      ctx.fillStyle=sk.hatCol||'#cc1010';
+      ctx.fillRect(x+1,y-10,g.w-2,6);ctx.fillRect(x+3,y-14,g.w-6,5);ctx.fillRect(x+5,y-17,g.w-10,4);
+      ctx.fillRect(x+7,y-19,4,3);
+      ctx.fillStyle='#f0f0f0';ctx.fillRect(x,y-10,g.w,3);ctx.fillRect(x+6,y-20,4,4);
+    }
+    if(sk.antlers){
+      // Reindeer antlers on mom
+      ctx.fillStyle='#8b5a1a';
+      ctx.fillRect(x+1,y-10,2,7);ctx.fillRect(x+g.w-3,y-10,2,7);
+      ctx.fillRect(x-2,y-14,3,3);ctx.fillRect(x+2,y-13,2,3);
+      ctx.fillRect(x+g.w-3,y-14,3,3);ctx.fillRect(x+g.w-4,y-13,2,3);
+    }
+    if(sk.hearts){
+      // Floating hearts above guard
+      const hp=gt*0.03;
+      ['#ff6090','#ff90b0','#ff4070'].forEach((hc,i)=>{
+        const hx=x+g.w/2+Math.cos(hp+i*2.1)*6,hy=y-14-Math.abs(Math.sin(hp*0.8+i))*5;
+        ctx.fillStyle=hc;ctx.font='7px sans-serif';ctx.textAlign='center';
+        ctx.fillText('♥',hx,hy);
+      });ctx.textAlign='left';
+    }
+  }
+
   // Head
-  ctx.fillStyle=isMom?'#e8b098':'#e8a878';ctx.fillRect(x+2,y-5,g.w-4,13);
-  ctx.fillStyle=isMom?'#8b3a6a':'#686868';ctx.fillRect(x+2,y-5,g.w-4,2);
+  ctx.fillStyle=sk.head;ctx.fillRect(x+2,y-5,g.w-4,13);
+  ctx.fillStyle=sk.hair;ctx.fillRect(x+2,y-5,g.w-4,2);
   ctx.fillRect(x-1,y-3,3,5);ctx.fillRect(x+g.w-2,y-3,3,5);
+
+  // Heart-print robe detail (Valentine's)
+  if(sk.hearts&&!alert){
+    ctx.fillStyle='rgba(255,150,180,0.35)';
+    ctx.fillRect(x+3,y+8,3,2);ctx.fillRect(x+2,y+7,2,2);ctx.fillRect(x+5,y+7,2,2);ctx.fillRect(x+3,y+10,1,1);
+    ctx.fillRect(x+g.w-6,y+12,3,2);ctx.fillRect(x+g.w-7,y+11,2,2);ctx.fillRect(x+g.w-4,y+11,2,2);
+  }
+
   // Eyes
   ctx.fillStyle=alert?'#ff1010':'#1e1e22';
   const ex=x+g.w/2+Math.cos(g.facing)*4,ey=y+1+Math.sin(g.facing);
@@ -2268,10 +3143,10 @@ function drawGuard(g,isMom){
   ctx.fillStyle=isMom?'#906090':'#707070';ctx.fillRect(x+g.w-2,y+8,4,12);
   // Indicators
   if(g.sleeping){
-    ctx.fillStyle='#e8a878';ctx.fillRect(ex-4,ey-2,8,5);
+    ctx.fillStyle=sk.head;ctx.fillRect(ex-4,ey-2,8,5);
     ctx.fillStyle='#3a2210';ctx.fillRect(ex-3,ey,6,2);
     const zp=gt*0.04;
-    [[9,0,0],[7,12,0],[5,22,0]].forEach(([sz,ox,],i)=>{
+    [[9,0,0],[7,12,0],[5,22,0]].forEach(([sz,ox],i)=>{
       const zx=x+g.w+4+ox+Math.sin(zp+i)*2,zy=y-8-ox*0.8-Math.abs(Math.sin(zp*0.5+i))*5;
       ctx.fillStyle=`rgba(162,155,254,${0.9-i*0.25})`;ctx.font=`bold ${sz}px monospace`;
       ctx.textAlign='left';ctx.fillText('z',zx,zy);
@@ -2554,7 +3429,8 @@ function bushHideSpot(px,py){
 
 function draw(){
   ctx.save();ctx.translate(shake.x,shake.y);
-  ctx.fillStyle='#04040d';ctx.fillRect(-12,-12,GW+24,GH+24);
+  const theme=getTheme();
+  ctx.fillStyle=theme.bodyBg||'#04040d';ctx.fillRect(-12,-12,GW+24,GH+24);
   drawOutdoor();
   drawRooms();
   FURN.forEach(f=>{if(LEVELS[curLvl].outdoor&&f.y>=620)return;drawFurn(f);});
@@ -2565,6 +3441,8 @@ function draw(){
   drawGuard(DAD,false);drawGuard(MOM,true);
   drawWalls();doors.forEach(drawDoor);drawGuestDoor();
   drawLighting();
+  // Christmas theme map tint
+  if(theme.mapTint){ctx.fillStyle=theme.mapTint;ctx.fillRect(0,0,GW,GH);}
   // Particles
   parts.forEach(p=>{ctx.globalAlpha=p.life/55;ctx.fillStyle=p.col;ctx.fillRect(p.x-p.sz/2,p.y-p.sz/2,p.sz,p.sz);});
   ctx.globalAlpha=1;
@@ -2608,6 +3486,9 @@ function loop(){if(!gr||paused)return;update();draw();if(controlScheme==='pc')up
   else setControls('mobile');
 })();
 
+applyTheme('default');
+loadGameData();
+applyTheme(currentThemeId);
 draw();
 </script>
 </body>
