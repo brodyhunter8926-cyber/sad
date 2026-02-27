@@ -33,6 +33,119 @@ button{background:transparent;border:2px solid #5a4ecc;color:#9090ee;padding:cla
 button:active{background:#5a4ecc;color:#fff;}
 .hidden{display:none!important;}
 
+/* ── AUTH SCREEN ─────────────────────────────────────────────────── */
+#authScreen{
+  position:fixed;inset:0;z-index:9000;
+  display:flex;align-items:center;justify-content:center;
+  background:#04040d;font-family:'Press Start 2P',cursive;
+  padding:16px;
+}
+#authScreen .sbg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 20%,#12083a 0%,#04040d 70%);
+  z-index:0;
+}
+.auth-card{
+  position:relative;z-index:1;
+  width:100%;max-width:340px;
+  background:rgba(8,6,28,.92);
+  border:1.5px solid rgba(162,155,254,.18);
+  border-radius:12px;
+  padding:28px 24px 24px;
+  box-shadow:0 0 60px rgba(90,78,204,.15),0 0 120px rgba(90,78,204,.07);
+}
+.auth-logo{
+  text-align:center;margin-bottom:20px;
+}
+.auth-logo .moon2{font-size:32px;display:block;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 16px #a29bfe55);margin-bottom:8px;}
+.auth-logo h2{font-size:clamp(9px,3vw,13px);color:#ff6b9d;text-shadow:0 0 20px #ff6b9d44,2px 2px 0 #7d1c3a;letter-spacing:.05em;}
+.auth-logo .auth-sub{font-size:clamp(4px,1.3vw,5px);color:#5060a0;margin-top:5px;letter-spacing:.08em;}
+
+/* Tab switcher */
+.auth-tabs{display:flex;margin-bottom:20px;border-radius:6px;overflow:hidden;border:1.5px solid rgba(162,155,254,.15);}
+.auth-tab{
+  flex:1;padding:10px 0;font-family:'Press Start 2P',cursive;
+  font-size:clamp(5px,1.5vw,7px);cursor:pointer;border:none;
+  background:transparent;color:#4858a0;
+  transition:background .2s,color .2s;letter-spacing:.04em;
+  touch-action:manipulation;
+}
+.auth-tab.active{background:rgba(90,78,204,.25);color:#a29bfe;}
+.auth-tab:not(.active):hover{background:rgba(90,78,204,.08);}
+
+/* Form fields */
+.auth-field{margin-bottom:14px;text-align:left;}
+.auth-field label{display:block;font-size:clamp(4px,1.2vw,5px);color:#5870b0;margin-bottom:6px;letter-spacing:.08em;}
+.auth-input{
+  width:100%;background:rgba(4,4,20,.7);
+  border:1.5px solid rgba(162,155,254,.2);
+  border-radius:5px;padding:10px 12px;
+  color:#c0c8f0;font-family:'Press Start 2P',cursive;
+  font-size:clamp(6px,1.8vw,8px);outline:none;
+  transition:border-color .15s,box-shadow .15s;
+  -webkit-user-select:text;user-select:text;touch-action:auto;
+}
+.auth-input:focus{border-color:rgba(162,155,254,.55);box-shadow:0 0 0 3px rgba(162,155,254,.08);}
+.auth-input::placeholder{color:#303860;}
+
+/* Password strength bar */
+.pw-strength{height:3px;border-radius:2px;margin-top:6px;background:rgba(162,155,254,.1);overflow:hidden;transition:all .2s;}
+.pw-strength-fill{height:100%;width:0%;border-radius:2px;transition:width .3s,background .3s;}
+
+/* Submit button */
+.auth-btn{
+  width:100%;margin-top:4px;padding:13px;
+  background:rgba(90,78,204,.15);border:2px solid rgba(90,78,204,.5);
+  border-radius:5px;color:#a29bfe;
+  font-family:'Press Start 2P',cursive;font-size:clamp(7px,2vw,9px);
+  cursor:pointer;letter-spacing:.06em;
+  transition:background .15s,border-color .15s,color .15s,transform .1s;
+  touch-action:manipulation;
+}
+.auth-btn:hover{background:rgba(90,78,204,.3);border-color:#a29bfe;color:#c0b8ff;}
+.auth-btn:active{transform:scale(0.98);background:rgba(90,78,204,.45);}
+.auth-btn.success{background:rgba(0,184,148,.15);border-color:#00b894;color:#00b894;}
+
+/* Messages */
+.auth-msg{
+  min-height:18px;margin-top:10px;
+  font-size:clamp(4px,1.3vw,6px);text-align:center;
+  line-height:2;letter-spacing:.04em;
+  transition:opacity .2s;
+}
+.auth-msg.err{color:#e74c3c;}
+.auth-msg.ok{color:#00b894;}
+
+/* Divider */
+.auth-divider{display:flex;align-items:center;gap:8px;margin:12px 0 0;opacity:.4;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(162,155,254,.3);}
+.auth-divider span{font-size:5px;color:#5060a0;white-space:nowrap;}
+
+/* User pill on start screen */
+.user-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(90,78,204,.12);border:1.5px solid rgba(162,155,254,.2);
+  border-radius:20px;padding:6px 14px;margin-bottom:10px;
+  font-size:clamp(4px,1.3vw,6px);color:#a29bfe;
+}
+.user-pill .uname{color:#c0c8f0;font-size:clamp(5px,1.5vw,7px);}
+.user-pill .logout-btn{
+  background:none;border:none;padding:2px 6px;margin:0;min-height:unset;
+  color:#5060a0;font-family:'Press Start 2P',cursive;font-size:clamp(4px,1.1vw,5px);
+  cursor:pointer;border-radius:3px;border:1px solid rgba(162,155,254,.15);
+  transition:color .15s,border-color .15s;
+}
+.user-pill .logout-btn:hover{color:#e74c3c;border-color:#e74c3c44;}
+
+/* Shake animation for wrong password */
+@keyframes authShake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-6px);}40%,80%{transform:translateX(6px);}}
+.auth-card.shake{animation:authShake .35s ease;}
+@keyframes authFadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.auth-card{animation:authFadeIn .4s ease;}
+/* Stars in auth bg */
+.auth-star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s);}
+
+
 /* HUD — scales with canvas */
 #hud{position:absolute;top:0;left:50%;transform:translateX(-50%);
   width:min(100vw, calc(100dvh * 480/900));
@@ -333,6 +446,62 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 </head>
 <body>
 
+<!-- ── AUTH SCREEN ───────────────────────────────────────────────────────── -->
+<div id="authScreen">
+  <div class="sbg"></div>
+  <!-- Stars injected by JS -->
+
+  <div class="auth-card" id="authCard">
+
+    <div class="auth-logo">
+      <span class="moon2">🌙</span>
+      <h2>PAST MY BEDTIME</h2>
+      <div class="auth-sub">YOUR PROGRESS · YOUR ACCOUNT</div>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin"    onclick="switchAuthTab('login')">🔑 LOG IN</button>
+      <button class="auth-tab"        id="tabRegister" onclick="switchAuthTab('register')">✨ SIGN UP</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <div class="auth-field">
+        <label>USERNAME</label>
+        <input class="auth-input" id="loginUser" type="text" placeholder="your username" autocomplete="username" maxlength="20">
+      </div>
+      <div class="auth-field">
+        <label>PASSWORD</label>
+        <input class="auth-input" id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button class="auth-btn" onclick="doLogin()">▶ LOG IN</button>
+      <div class="auth-msg" id="loginMsg"></div>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" class="hidden">
+      <div class="auth-field">
+        <label>CHOOSE USERNAME</label>
+        <input class="auth-input" id="regUser" type="text" placeholder="3–20 characters" autocomplete="username" maxlength="20">
+      </div>
+      <div class="auth-field">
+        <label>CREATE PASSWORD</label>
+        <input class="auth-input" id="regPass" type="password" placeholder="min 6 characters" autocomplete="new-password" oninput="updatePwStrength(this.value)">
+        <div class="pw-strength"><div class="pw-strength-fill" id="pwFill"></div></div>
+      </div>
+      <div class="auth-field">
+        <label>CONFIRM PASSWORD</label>
+        <input class="auth-input" id="regPass2" type="password" placeholder="repeat password" autocomplete="new-password">
+      </div>
+      <button class="auth-btn" onclick="doRegister()">✨ CREATE ACCOUNT</button>
+      <div class="auth-msg" id="regMsg"></div>
+    </div>
+
+    <div class="auth-divider"><span>— ALL DATA SAVED PER ACCOUNT —</span></div>
+
+  </div>
+</div>
+
 <div id="gc">
 <canvas id="c"></canvas>
 
@@ -351,7 +520,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
   <div id="objs"></div>
 </div>
 <!-- Version badge -->
-<div id="verBadge" style="position:absolute;bottom:6px;right:8px;font-size:5px;color:rgba(162,155,254,.35);font-family:'Press Start 2P',cursive;pointer-events:auto;cursor:pointer;z-index:12;" onclick="showUpdateLog()">v1.5.0</div>
+<div id="verBadge" style="position:absolute;bottom:6px;right:8px;font-size:5px;color:rgba(162,155,254,.35);font-family:'Press Start 2P',cursive;pointer-events:auto;cursor:pointer;z-index:12;" onclick="showUpdateLog()">v1.6.0</div>
 
 <div id="ni">!! NOISY !!</div>
 <div id="cc"></div>
@@ -373,11 +542,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 </div>
 
 <!-- Start screen -->
-<div id="ss" class="screen">
+<div id="ss" class="screen hidden">
   <div class="sbg" id="sbg"></div>
   <div class="moon">🌙</div>
   <h1 class="tm">PAST MY BEDTIME</h1>
   <div class="sub">6 levels of sneaking.<br><em>Keys · doors · guards · and the great outdoors.</em></div>
+  <div id="userPill" class="user-pill" style="display:none;">
+    <span>👤</span><span class="uname" id="userPillName"></span>
+    <button class="logout-btn" onclick="doLogout()">LOG OUT</button>
+  </div>
   <div class="coins-badge coin-display" style="margin-bottom:10px;">🪙 0 coins</div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
     <button onclick="showDiffSelect()">▶ PLAY</button>
@@ -1388,24 +1561,16 @@ function drawKidAt(ctx,x,y,av,scale,hasPhone,hidden,walkFrame,facing,hasTablet){
       for(let i=0;i<2;i++)ctx.fillRect(x+(4+i*5)*s,y-4*s,2*s,s);
     }
   }
-  // ── EYES ──
-  const eyeCol=(av.premiumSkin&&av.premiumSkin.blackEyes)?'#000000':'#1a1a22';
-  const eyeGlint=!(av.premiumSkin&&av.premiumSkin.blackEyes);
-  ctx.fillStyle=eyeCol;
+  // ── EYES — 1:1 match with dad (8px wide, 4px tall on 14px body) ──
+  const blackEyes = av.premiumSkin && av.premiumSkin.blackEyes;
+  ctx.fillStyle = blackEyes ? '#000000' : '#1e1e22';
   if(facing==='left'){
-    ctx.fillRect(x+1*s,y+1*s,2*s,2*s);
+    ctx.fillRect(x,y+Math.round(1*s),Math.round(8*s),Math.round(4*s));
   } else if(facing==='right'){
-    ctx.fillRect(x+W-3*s,y+1*s,2*s,2*s);
+    ctx.fillRect(x+W-Math.round(8*s),y+Math.round(1*s),Math.round(8*s),Math.round(4*s));
   } else {
-    const ey=facing==='up'?(y-1*s):(y+1*s);
-    ctx.fillRect(x+3*s,ey,2*s,2*s);
-    ctx.fillRect(x+W-5*s,ey,2*s,2*s);
-    // eye glint (suppressed for blackEyes skins)
-    if(eyeGlint){
-      ctx.fillStyle='rgba(255,255,255,0.55)';
-      ctx.fillRect(x+3*s,ey,1*s,1*s);
-      ctx.fillRect(x+W-5*s,ey,1*s,1*s);
-    }
+    const ey=facing==='up'?(y-Math.round(2*s)):(y+Math.round(1*s));
+    ctx.fillRect(x+Math.round(3*s),ey,Math.round(8*s),Math.round(4*s));
   }
   // ── CHRISTMAS SKIN OVERLAYS ──
   if(av.premiumSkin&&av.premiumSkin.xmasSkin){
@@ -1686,37 +1851,261 @@ function lighter(hex,amt){
 }
 
 // ── EARLY DECLARATIONS (needed before first use) ──────────────────────────────
-const GAME_VERSION='v1.5.0';
+const GAME_VERSION='v1.6.0';
 let coins=0;
 
 // ── SAVE / LOAD ───────────────────────────────────────────────────────────────
-function saveGameData(){
-  try{
-    localStorage.setItem('pmb_save',JSON.stringify({
+// ── ACCOUNT SYSTEM ────────────────────────────────────────────────────────────
+// All accounts stored under 'pmb_accounts' — a JSON object keyed by username
+// Each account: { hash, data: { coins, avatar, currentThemeId, unlockedSkins, unlockedThemes, unlockedOutfits } }
+// Current session stored under 'pmb_session' — just the username
+
+let currentUser = null; // username of logged-in player
+
+function hashPassword(pw) {
+  // Simple deterministic hash — not cryptographic but fine for local storage
+  let h = 0x811c9dc5;
+  for (let i = 0; i < pw.length; i++) {
+    h ^= pw.charCodeAt(i);
+    h = (h * 0x01000193) >>> 0;
+  }
+  return h.toString(16);
+}
+
+function getAccounts() {
+  try { return JSON.parse(localStorage.getItem('pmb_accounts') || '{}'); } catch(e) { return {}; }
+}
+
+function setAccounts(obj) {
+  try { localStorage.setItem('pmb_accounts', JSON.stringify(obj)); } catch(e) {}
+}
+
+function saveGameData() {
+  if (!currentUser) return;
+  try {
+    const accounts = getAccounts();
+    if (!accounts[currentUser]) return;
+    accounts[currentUser].data = {
       coins,
       avatar,
       currentThemeId,
-      unlockedSkins:[...unlockedSkins],
-      unlockedThemes:[...unlockedThemes],
-      unlockedOutfits:[...unlockedOutfits],
-    }));
-  }catch(e){}
+      unlockedSkins: [...unlockedSkins],
+      unlockedThemes: [...unlockedThemes],
+      unlockedOutfits: [...unlockedOutfits],
+    };
+    setAccounts(accounts);
+  } catch(e) {}
 }
-function loadGameData(){
-  try{
-    const raw=localStorage.getItem('pmb_save');
-    if(!raw)return;
-    const d=JSON.parse(raw);
-    if(d.coins!=null)coins=d.coins;
-    if(d.avatar)avatar={...avatar,...d.avatar};
-    if(d.currentThemeId)currentThemeId=d.currentThemeId;
-    if(d.unlockedSkins)unlockedSkins=new Set(d.unlockedSkins);
-    if(d.unlockedThemes)unlockedThemes=new Set(d.unlockedThemes);
-    if(d.unlockedOutfits)unlockedOutfits=new Set(d.unlockedOutfits);
-  }catch(e){}
+
+function loadGameData() {
+  if (!currentUser) return;
+  try {
+    const accounts = getAccounts();
+    const d = accounts[currentUser]?.data;
+    if (!d) return;
+    if (d.coins != null) coins = d.coins;
+    if (d.avatar) avatar = { ...avatar, ...d.avatar };
+    if (d.currentThemeId) currentThemeId = d.currentThemeId;
+    if (d.unlockedSkins) unlockedSkins = new Set(d.unlockedSkins);
+    if (d.unlockedThemes) unlockedThemes = new Set(d.unlockedThemes);
+    if (d.unlockedOutfits) unlockedOutfits = new Set(d.unlockedOutfits);
+  } catch(e) {}
 }
+
+function doLogin() {
+  const user = document.getElementById('loginUser').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  const msg  = document.getElementById('loginMsg');
+
+  if (!user || !pass) { showAuthMsg('loginMsg', 'err', 'FILL IN ALL FIELDS'); return; }
+
+  const accounts = getAccounts();
+  if (!accounts[user]) { shakeCard(); showAuthMsg('loginMsg', 'err', 'NO ACCOUNT FOUND'); return; }
+  if (accounts[user].hash !== hashPassword(pass)) { shakeCard(); showAuthMsg('loginMsg', 'err', 'WRONG PASSWORD'); return; }
+
+  // Success — log in
+  currentUser = user;
+  try { localStorage.setItem('pmb_session', user); } catch(e) {}
+  showAuthMsg('loginMsg', 'ok', '✓ WELCOME BACK, ' + user.toUpperCase() + '!');
+  document.getElementById('loginPass').value = '';
+
+  // Reset game state then load this user's data
+  resetGameState();
+  loadGameData();
+  applyTheme(currentThemeId);
+  updateCoinDisplay();
+  setTimeout(enterGame, 600);
+}
+
+function doRegister() {
+  const user  = document.getElementById('regUser').value.trim().toLowerCase();
+  const pass  = document.getElementById('regPass').value;
+  const pass2 = document.getElementById('regPass2').value;
+
+  if (!user || !pass || !pass2) { showAuthMsg('regMsg', 'err', 'FILL IN ALL FIELDS'); return; }
+  if (user.length < 3) { showAuthMsg('regMsg', 'err', 'USERNAME TOO SHORT (3+)'); return; }
+  if (!/^[a-z0-9_]+$/.test(user)) { showAuthMsg('regMsg', 'err', 'LETTERS/NUMBERS/_ ONLY'); return; }
+  if (pass.length < 6) { showAuthMsg('regMsg', 'err', 'PASSWORD TOO SHORT (6+)'); return; }
+  if (pass !== pass2) { shakeCard(); showAuthMsg('regMsg', 'err', 'PASSWORDS DO NOT MATCH'); return; }
+
+  const accounts = getAccounts();
+  if (accounts[user]) { showAuthMsg('regMsg', 'err', 'USERNAME TAKEN'); return; }
+
+  // Create account with empty save data
+  accounts[user] = {
+    hash: hashPassword(pass),
+    created: Date.now(),
+    data: {
+      coins: 0,
+      avatar: { skin: '#f5c5a3', hairId: 'h1', outfitId: 'o1', name: user.toUpperCase().slice(0, 8), premiumSkinId: null },
+      currentThemeId: 'default',
+      unlockedSkins: [],
+      unlockedThemes: ['default'],
+      unlockedOutfits: ['o1', 'o2', 'o3'],
+    }
+  };
+  setAccounts(accounts);
+
+  currentUser = user;
+  try { localStorage.setItem('pmb_session', user); } catch(e) {}
+
+  const btn = document.querySelector('#registerForm .auth-btn');
+  if (btn) btn.classList.add('success');
+  showAuthMsg('regMsg', 'ok', '✓ ACCOUNT CREATED!');
+
+  resetGameState();
+  loadGameData();
+  applyTheme(currentThemeId);
+  updateCoinDisplay();
+  setTimeout(enterGame, 800);
+}
+
+function doLogout() {
+  currentUser = null;
+  try { localStorage.removeItem('pmb_session'); } catch(e) {}
+  // Reset state
+  resetGameState();
+  // Hide start screen, show auth
+  document.getElementById('ss').classList.add('hidden');
+  document.getElementById('go').classList.add('hidden');
+  document.getElementById('lw').classList.add('hidden');
+  document.getElementById('ws').classList.add('hidden');
+  if (gr) { gr = false; paused = false; }
+  document.getElementById('pauseMenu').classList.add('hidden');
+  showAuthScreen();
+}
+
+function resetGameState() {
+  coins = 0;
+  avatar = { skin: '#f5c5a3', hairId: 'h1', outfitId: 'o1', name: 'KID', premiumSkinId: null };
+  currentThemeId = 'default';
+  unlockedSkins = new Set();
+  unlockedThemes = new Set(['default']);
+  unlockedOutfits = new Set(['o1', 'o2', 'o3']);
+}
+
+function enterGame() {
+  // Hide auth, show start screen
+  document.getElementById('authScreen').classList.add('hidden');
+  document.getElementById('ss').classList.remove('hidden');
+  // Show user pill
+  const pill = document.getElementById('userPill');
+  const pillName = document.getElementById('userPillName');
+  if (pill && pillName && currentUser) {
+    pillName.textContent = currentUser.toUpperCase();
+    pill.style.display = 'inline-flex';
+  }
+  updateCoinDisplay();
+}
+
+function showAuthScreen() {
+  document.getElementById('authScreen').classList.remove('hidden');
+  // Reset forms
+  ['loginUser','loginPass','regUser','regPass','regPass2'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  ['loginMsg','regMsg'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ''; });
+  const fill = document.getElementById('pwFill'); if (fill) { fill.style.width = '0%'; }
+  const btn = document.querySelector('#registerForm .auth-btn'); if (btn) btn.classList.remove('success');
+  switchAuthTab('login');
+  // Regenerate auth stars
+  buildAuthStars();
+}
+
+function switchAuthTab(tab) {
+  document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+  document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('registerForm').classList.toggle('hidden', tab !== 'register');
+}
+
+function showAuthMsg(id, type, text) {
+  const el = document.getElementById(id); if (!el) return;
+  el.className = 'auth-msg ' + type;
+  el.textContent = text;
+}
+
+function shakeCard() {
+  const card = document.getElementById('authCard');
+  card.classList.remove('shake');
+  void card.offsetWidth; // reflow
+  card.classList.add('shake');
+  setTimeout(() => card.classList.remove('shake'), 400);
+}
+
+function updatePwStrength(pw) {
+  const fill = document.getElementById('pwFill'); if (!fill) return;
+  let score = 0;
+  if (pw.length >= 6) score++;
+  if (pw.length >= 10) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^a-z0-9]/i.test(pw)) score++;
+  const pct = [0, 25, 50, 78, 100][score];
+  const cols = ['#e74c3c', '#e17055', '#fdcb6e', '#00b894'];
+  fill.style.width = pct + '%';
+  fill.style.background = cols[Math.max(0, score - 1)] || '#e74c3c';
+}
+
+function buildAuthStars() {
+  const screen = document.getElementById('authScreen');
+  // Remove existing stars
+  screen.querySelectorAll('.auth-star').forEach(s => s.remove());
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'auth-star';
+    const sz = Math.random() * 2 + 1;
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;
+      --d:${2+Math.random()*4}s;--dl:${Math.random()*4}s;--op:${0.3+Math.random()*0.5};`;
+    screen.appendChild(s);
+  }
+}
+
+// Allow Enter key to submit forms
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const authVisible = !document.getElementById('authScreen').classList.contains('hidden');
+  if (!authVisible) return;
+  const loginActive = !document.getElementById('loginForm').classList.contains('hidden');
+  if (loginActive) doLogin(); else doRegister();
+});
+
+
 let difficulty='medium'; // 'easy' | 'medium' | 'hard'
 const UPDATE_LOG=[
+  {ver:'v1.6.0',date:'Feb 2025',notes:[
+    'Account system — create account, log in once, all progress saved per player',
+    'Multiple accounts on one device with separate save slots',
+    'Auto-login on return visits — stay logged in between sessions',
+    '12 distinct hairstyles with pixel art shapes and live previews',
+    '8 Premium Skins shop — Ghost, Fire, Ice, Shadow, Gold, Neon, Candy, Toxic',
+    '3 Christmas limited skins — Santa, Penguin, Xmas Kid',
+    "3 Valentine's limited skins — Cupid, Heartbreaker, Love Bug",
+    '3 UI Themes — Default, Christmas, Valentine\'s (with ambient particles)',
+    'Seasonal Shop card shows the current season\'s limited skins',
+    'Dad & Mom get theme-based outfits — Santa hat, antlers, Valentine\'s hearts',
+    'Real eyes for Dad & Mom — iris, pupils, glints and mood-based eyebrows',
+    'Themes tab in Avatar Editor',
+  ]},
   {ver:'v1.5.0',date:'Feb 2025',notes:[
     'Avatar Editor fully polished — scrollable cards, large preview',
     'Pixel phone redesigned (camera dot, screen glare, home button)',
@@ -2467,7 +2856,6 @@ function update(){
   // Noise
   const loud=run&&(ix||iy);
   document.getElementById('ni').style.opacity=loud?1:0;
-  if(loud&&DAD.sleeping){DAD.sleeping=false;DAD.st=0;DAD.state='patrol';toast('😤 Noise woke Dad!','#e74c3c',225);}
   if(loud&&Math.random()<0.025&&DAD.state==='patrol'){DAD.state='investigate';DAD.ix=P.x;DAD.iy=P.y;}
   if(loud&&MOM.active&&Math.random()<0.025&&MOM.state==='patrol'){MOM.state='investigate';MOM.ix=P.x;MOM.iy=P.y;}
 
@@ -2718,7 +3106,9 @@ function guardOpenDoors(g){
 
 function moveGuard(g,tx,ty,spd){
   guardOpenDoors(g);
-  const step=navNextStep(g.x,g.y,tx,ty);
+  // If rerouting around an obstacle, override destination with escape node
+  const dest = (g.unstuckTarget&&g.state!=='chase') ? g.unstuckTarget : {x:tx,y:ty};
+  const step=navNextStep(g.x,g.y,dest.x,dest.y);
   const dx=step.x-(g.x+g.w/2), dy=step.y-(g.y+g.h/2);
   const d=Math.sqrt(dx*dx+dy*dy);
   if(d<1)return;
@@ -2740,17 +3130,27 @@ function moveGuard(g,tx,ty,spd){
       if(nn){ const dd=dst(g.x,g.y,nn.x,nn.y); if(dd>5){ g.x+=(nn.x-g.x)/dd*spd; g.y+=(nn.y-g.y)/dd*spd; }}
     }
   }
-  // ── STUCK DETECTION ───────────────────────────────────────────────
-  // Track movement; if guard barely moves for ~90 frames, send them to bed
+  // ── STUCK DETECTION — advanced reroute AI, never gives up ──────────
   const moved=dst(g.x,g.y,g.lastX||g.x,g.lastY||g.y);
   if(moved<0.3){
     g.stuckFrames=(g.stuckFrames||0)+1;
-    if(g.stuckFrames>90&&g.state!=='sleeping'&&g.state!=='goingTobed'){
-      g.state='goingTobed'; g.sc=0; g.stuckFrames=0;
-      toast(`😴 ${g.isMom?'Mom':'Dad'} gave up and went to bed…`,'#a29bfe',240);
+    // Every 25 frames stuck: pick an escape nav node in a different column
+    if(g.stuckFrames>25&&g.stuckFrames%25===0&&g.state!=='chase'){
+      const curCol=xCol(g.x);
+      const altCols=['L','H','R'].filter(co=>co!==curCol);
+      const altCol=altCols[Math.floor(Math.random()*altCols.length)];
+      const escId=nearestNode(g.x,g.y,altCol);
+      if(escId){const en=NAV[escId];g.unstuckTarget={x:en.x,y:en.y};}
+    }
+    // Hard stuck 120+ frames: snap to nearest nav node immediately
+    if(g.stuckFrames>120){
+      const nearId=nearestNode(g.x,g.y);
+      if(nearId){const n=NAV[nearId];g.x=n.x;g.y=n.y;}
+      g.stuckFrames=0;g.unstuckTarget=null;
     }
   } else {
     g.stuckFrames=0;
+    if(g.unstuckTarget&&moved>2)g.unstuckTarget=null;
   }
   g.lastX=g.x; g.lastY=g.y;
   g.facing=Math.atan2(uy,ux);
@@ -2774,13 +3174,13 @@ function updateGuard(g){
   if(!g.active)return;
   const baseSpd=g.spd*settings.guardSpd;
 
-  // Sleeping — count down then wake
+  // Sleeping — only Mom can sleep (Dad reroutes instead)
   if(g.sleeping){
+    if(!g.isMom){g.sleeping=false;g.state='patrol';return;}
     g.st++;
-    const dur=g.isMom?380:720;
-    if(g.st>dur){
+    if(g.st>380){
       g.sleeping=false; g.st=0; g.state='patrol';
-      toast(`👁 ${g.isMom?'Mom':'Dad'} woke up!`,'#e74c3c',215);
+      toast('👁 Mom woke up!','#e74c3c',215);
     }
     return;
   }
@@ -2790,8 +3190,8 @@ function updateGuard(g){
   // ── PATROL ──────────────────────────────────────────────────────
   if(g.state==='patrol'){
     g.running=false;
-    // Time to sleep?
-    if(g.sc>g.scLen){ g.state='goingTobed'; g.sc=0; return; }
+    // Instead of sleeping, reshuffle patrol to a random waypoint for unpredictability
+    if(g.sc>g.scLen){ g.sc=0; g.cp=Math.floor(Math.random()*g.pts.length); return; }
 
     const pt=g.pts[g.cp];
     moveGuard(g,pt.x,pt.y,baseSpd);
@@ -2824,19 +3224,11 @@ function updateGuard(g){
       g.state='investigate'; g.ix=P.x; g.iy=P.y; g.sc=0;
     }
 
-  // ── GOING TO BED ──────────────────────────────────────────────────
+  // ── GOING TO BED (repurposed: lost/confused → reroute to patrol) ──
   } else if(g.state==='goingTobed'){
-    g.running=false;
-    const bx=g.isMom?100:375, by=g.isMom?100:110;
-    moveGuard(g,bx,by,baseSpd);
-    if(dst(g.x,g.y,bx,by)<20){
-      g.sleeping=true; g.st=0;
-      toast(`💤 ${g.isMom?'Mom':'Dad'} fell asleep!`,'#a29bfe',215); SFX.sleep();
-    }
-    // Distracted by nearby player while heading to bed
-    if(!P.hidden&&dst(g.x,g.y,P.x,P.y)<100){
-      g.state='investigate'; g.ix=P.x; g.iy=P.y; g.sc=0;
-    }
+    // Don't sleep — pick a new random patrol point and resume immediately
+    g.cp=Math.floor(Math.random()*g.pts.length);
+    g.state='patrol'; g.sc=0; g.wt=0;
 
   // ── INVESTIGATE ───────────────────────────────────────────────────
   } else if(g.state==='investigate'){
@@ -3463,7 +3855,6 @@ function draw(){
     ctx.fillStyle=lamp;ctx.fillRect(P.x-80,P.y-80,P.w+160,P.h+160);
   }
   // Sleep pulse
-  if(DAD.sleeping){const p2=Math.abs(Math.sin(gt*0.06))*0.04+0.015;ctx.fillStyle=`rgba(162,155,254,${p2})`;ctx.fillRect(0,0,GW,GH);}
   // Float texts
   floats.forEach(f=>{ctx.globalAlpha=f.life/f.ml;ctx.fillStyle=f.c;ctx.font='bold 11px monospace';ctx.textAlign='center';ctx.fillText(f.t,f.x,f.y);});
   ctx.globalAlpha=1;ctx.textAlign='left';
@@ -3487,10 +3878,29 @@ function loop(){if(!gr||paused)return;update();draw();if(controlScheme==='pc')up
 })();
 
 applyTheme('default');
-loadGameData();
-applyTheme(currentThemeId);
+
+// ── STARTUP: check for existing session ──────────────────────────────────────
+buildAuthStars();
+(function checkSession() {
+  try {
+    const savedUser = localStorage.getItem('pmb_session');
+    const accounts  = getAccounts();
+    if (savedUser && accounts[savedUser]) {
+      // Auto-login the returning user
+      currentUser = savedUser;
+      resetGameState();
+      loadGameData();
+      applyTheme(currentThemeId);
+      updateCoinDisplay();
+      enterGame();
+      return;
+    }
+  } catch(e) {}
+  // No valid session — show auth screen (it's visible by default)
+  showAuthScreen();
+})();
+
 draw();
 </script>
 </body>
 </html>
-
